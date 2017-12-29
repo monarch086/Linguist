@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Linguist.Services;
+using System.Web.Security;
 using Linguist.DataLayer.Model;
+using Linguist.Services.Interfaces;
 
 namespace Linguist.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private UserService _userService;
+        private readonly IUsersService _userService;
+        private readonly IAccountsService _accountsService;
 
-        public AccountController()
+        public AccountController(IUsersService userService, IAccountsService accountsService)
         {
-            _userService = new UserService();
+            _userService = userService;
+            _accountsService = accountsService;
         }
 
         [HttpGet]
@@ -38,27 +40,27 @@ namespace Linguist.Web.Controllers
         [HttpPost]
         public ActionResult Register(string login, string password)
         {
-            int salt = _userService.ComputeSalt();
+            int salt = _accountsService.ComputeSalt();
 
             User user = new User
             {
                 Login = login,
                 Salt = salt,
-                Password = _userService.GetHashFromPassword(password, salt),
+                Password = _accountsService.GetHashFromPassword(password, salt),
                 DateAdded = DateTime.Now,
                 IsAdmin = false
             };
 
             if (_userService.AddUser(user))
-                return new HttpResponse();
+                return Redirect(Url.Action("MyWords", "Home"));
 
-            return View();
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Product not found");
         }
 
         public ActionResult SignOut()
         {
-            authProvider.SignOut();
-            return Redirect(Url.Action("List", "Products"));
+            FormsAuthentication.SignOut();
+            return Redirect(Url.Action("Start", "Account"));
         }
     }
 }
