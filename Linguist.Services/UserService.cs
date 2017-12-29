@@ -1,35 +1,51 @@
 ﻿using Linguist.DataLayer.Model;
-using System;
+using Linguist.DataLayer.Repositories;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Linguist.Services
 {
     public class UserService
     {
-        public UserService()
+        private readonly IRepository<User> _usersRepository;
+
+        private readonly IRepository<Word> _wordsRepository;
+
+        private readonly IRepository<Category> _categoryRepository;
+
+        public UserService(IRepository<User> usersRepository, IRepository<Word> wordsRepository, IRepository<Category> categoryRepository)
         {
-            
+            _usersRepository = usersRepository;
+            _wordsRepository = wordsRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public bool AddUser(User user)
         {
-            return true;
+            return _usersRepository.Add(user) > 0;
         }
 
         public bool RemoveUser(User user)
         {
-            return true;
+            return _usersRepository.Remove(user) > 0;
+        }
+
+        public bool EditUser(User user)
+        {
+            return _usersRepository.Edit(user) > 0;
         }
 
         public IEnumerable<Word> GetUserWords(User user)
         {
-            return null;
+            return _wordsRepository.GetAll().Where(w => w.UserId == user.UserId).ToList();
         }
 
         public IEnumerable<Category> GetUserCategories(User user)
         {
-            return null;
+            IEnumerable<int> categoryIds =
+                _wordsRepository.GetAll().Where(w => w.UserId == user.UserId).Select(w => w.CaregoryId);
+
+            return _categoryRepository.GetAll().Where(c => categoryIds.Contains(c.CategoryId));
         }
     }
 }
