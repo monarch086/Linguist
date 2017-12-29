@@ -10,8 +10,12 @@ namespace Linguist.DataLayer.Model
 
         public string Password { get; set; }
 
+        public int Salt { get; set; }
+
         public string Name { get; set; }
 
         public DateTime DateAdded { get; set; }
+
+        public bool IsAdmin { get; set; }
     }
 }

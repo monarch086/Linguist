@@ -16,8 +16,10 @@ CREATE TABLE [Users] (
 	UserId int NOT NULL,
 	Login nvarchar(255) NOT NULL UNIQUE,
 	Password nvarchar(512) NOT NULL,
+	Salt int NOT NULL,
 	Name nvarchar(512) NOT NULL,
 	DateAdded datetime,
+	IsAdmin bit NOT NULL DEFAULT '0',
   CONSTRAINT [PK_USERS] PRIMARY KEY CLUSTERED
   (
   [UserId] ASC
@@ -27,6 +29,7 @@ CREATE TABLE [Users] (
 GO
 CREATE TABLE [Categories] (
 	CategoryId int NOT NULL,
+	ParentCategoryId int DEFAULT '0',
 	CategoryName nvarchar(1023) NOT NULL,
 	DateAdded datetime,
   CONSTRAINT [PK_CATEGORIES] PRIMARY KEY CLUSTERED
@@ -46,6 +49,7 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [Words] CHECK CONSTRAINT [Words_fk1]
 GO
+
 
 
 
