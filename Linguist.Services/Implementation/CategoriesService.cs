@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Linguist.DataLayer.Model;
+﻿using Linguist.DataLayer.Model;
+using Linguist.Services.Interfaces;
 
-namespace Linguist.Services
+namespace Linguist.Services.Implementation
 {
-    public class CategoryService
+    public class CategoriesService : ICategoriesService
     {
-        public CategoryService()
+        public CategoriesService()
         {
 
         }

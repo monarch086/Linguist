@@ -1,13 +1,12 @@
 ﻿using Linguist.DataLayer.Model;
 using Linguist.DataLayer.Repositories;
+using Linguist.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 
-namespace Linguist.Services
+namespace Linguist.Services.Implementation
 {
-    public class UserService
+    public class UsersService : IUsersService
     {
         private readonly IRepository<User> _usersRepository;
 
@@ -15,31 +14,13 @@ namespace Linguist.Services
 
         private readonly IRepository<Category> _categoryRepository;
 
-        public UserService(IRepository<User> usersRepository, IRepository<Word> wordsRepository, IRepository<Category> categoryRepository)
+        public UsersService(IRepository<User> usersRepository, IRepository<Word> wordsRepository, IRepository<Category> categoryRepository)
         {
             _usersRepository = usersRepository;
             _wordsRepository = wordsRepository;
             _categoryRepository = categoryRepository;
         }
-
-        public bool AuthenticateUser(string login, string password)
-        {
-            User user = _usersRepository.GetAll().FirstOrDefault(u => u.Login == login);
-
-            if (user == null)
-                return false;
-
-            string hash;
-            var data = Encoding.UTF8.GetBytes(password + user.Salt);
-
-            using (SHA512 shaM = new SHA512Managed())
-            {
-                hash = shaM.ComputeHash(data).ToString();
-            }
-
-            return user.Password.Equals(hash);
-        }
-
+        
         public bool AddUser(User user)
         {
             return _usersRepository.Add(user) > 0;
