@@ -2,6 +2,8 @@
 using Linguist.DataLayer.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Linguist.Services
 {
@@ -18,6 +20,24 @@ namespace Linguist.Services
             _usersRepository = usersRepository;
             _wordsRepository = wordsRepository;
             _categoryRepository = categoryRepository;
+        }
+
+        public bool AuthenticateUser(string login, string password)
+        {
+            User user = _usersRepository.GetAll().FirstOrDefault(u => u.Login == login);
+
+            if (user == null)
+                return false;
+
+            string hash;
+            var data = Encoding.UTF8.GetBytes(password + user.Salt);
+
+            using (SHA512 shaM = new SHA512Managed())
+            {
+                hash = shaM.ComputeHash(data).ToString();
+            }
+
+            return user.Password.Equals(hash);
         }
 
         public bool AddUser(User user)
