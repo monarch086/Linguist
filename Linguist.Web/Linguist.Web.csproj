@@ -141,6 +141,16 @@
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Linguist.DataLayer\Linguist.DataLayer.csproj">
+      <Project>{E1D90A5C-0996-4C40-A221-654B1A4D322F}</Project>
+      <Name>Linguist.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linguist.Services\Linguist.Services.csproj">
+      <Project>{3f33e327-76df-49b9-af94-f2226d5dd854}</Project>
+      <Name>Linguist.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
