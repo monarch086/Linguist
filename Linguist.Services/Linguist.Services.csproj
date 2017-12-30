@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DI\ServServiceModule.cs" />
     <Compile Include="Implementation\AccountsService.cs" />
     <Compile Include="Implementation\CategoriesService.cs" />
     <Compile Include="Interfaces\IAccountsService.cs" />

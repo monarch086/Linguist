@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse" role="navigation">
+        <a class="navbar-brand" href="#">
+            <span class="hidden-xs">Linguist</span>
+            <div class="visible-xs">Linguist</div>
+        </a>
+    </div>
+    
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            @RenderBody()
+        </div>
+    </div>
+
+</body>
+</html>
