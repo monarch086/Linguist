@@ -1,5 +1,5 @@
 CREATE TABLE [Words] (
-	WordId int NOT NULL,
+	WordId int IDENTITY(1,1) NOT NULL,
 	CategoryId int NOT NULL,
 	UserId int NOT NULL,
 	OriginalWord nvarchar(512) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE [Words] (
 )
 GO
 CREATE TABLE [Users] (
-	UserId int NOT NULL,
+	UserId int IDENTITY(1,1) NOT NULL,
 	Login nvarchar(255) NOT NULL UNIQUE,
 	Password nvarchar(512) NOT NULL,
 	Salt int NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE [Users] (
 )
 GO
 CREATE TABLE [Categories] (
-	CategoryId int NOT NULL,
+	CategoryId int IDENTITY(1,1) NOT NULL,
 	ParentCategoryId int DEFAULT '0',
 	CategoryName nvarchar(1023) NOT NULL,
 	DateAdded datetime,

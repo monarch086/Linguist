@@ -12,10 +12,10 @@ namespace Linguist.DataLayer.Repositories
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public UsersRepository(LinguistContext context, IUnitOfWork unitOfWork)
+        public UsersRepository(LinguistContext context)
         {
             _context = context;
-            _unitOfWork = unitOfWork;
+            _unitOfWork = new UnitOfWork.UnitOfWork(context);
         }
 
         public int Add(User entity)
