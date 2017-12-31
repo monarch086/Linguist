@@ -10,8 +10,12 @@
             <div class="panel with-nav-tabs panel-info">
                 <div class="panel-heading">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#login" data-toggle="tab"> Логин </a></li>
-                        <li><a href="#signup" data-toggle="tab"> Регистрация </a></li>
+                        <li class="active">
+                            @Html.ActionLink("Вход", "Login", "Account", new { data_toggle = "tab" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Регистрация", "Register", "Account", new { data_toggle = "tab" })
+                        </li>
                     </ul>
                 </div>
                 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
