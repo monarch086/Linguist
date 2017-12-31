@@ -1,13 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Start";
+    ViewBag.Title = "Linguist: Вход";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
-<h2>Добро пожаловать!</h2>
-
-<div class="text-center">
-    @Html.ActionLink("Войти", "Login", "Account", new { @class = "btn btn-primary" })
-    @Html.ActionLink("Зарегистрироваться", "Register", "Account", new { @class = "btn btn-primary" })
-    @*<a class="btn btn-primary" href="@Model.ReturnUrl">Назад</a>*@
-</div>
+@Html.ActionLink("Войти", "Login", "Account", new { @class = "btn btn-primary" })
+@Html.ActionLink("Зарегистрироваться", "Register", "Account", new { @class = "btn btn-primary" })

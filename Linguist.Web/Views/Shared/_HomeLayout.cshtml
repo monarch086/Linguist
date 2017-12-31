@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="~/Content/LoginStyles.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
 
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">
-            <span class="hidden-xs">Linguist</span>
-            <div class="visible-xs">Linguist</div>
-        </a>
-    </div>
+<div class="navbar navbar-inverse" role="navigation">
+    <a class="navbar-brand" href="#">
+        <span class="hidden-xs">Linguist</span>
+        <div class="visible-xs">Linguist</div>
+    </a>
+    @Html.ActionLink("Мои слова", "MyWords", "Home", null, new { @class = "navbar-brand" })
+    @Html.ActionLink("Тренировка", "Train", "Home", null, new { @class = "navbar-brand" })
+    @Html.ActionLink("Тест", "Test", "Home", null, new { @class = "navbar-brand" })
+</div>
     
 <div class="row text-center">
     <h2>Добро пожаловать на проект <b>"Linguist"</b>!</h2>

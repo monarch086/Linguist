@@ -1,4 +1,5 @@
-﻿using Linguist.DataLayer.Model;
+﻿using System;
+using Linguist.DataLayer.Model;
 using Linguist.DataLayer.Repositories;
 using Linguist.Services.Interfaces;
 using System.Collections.Generic;
@@ -36,15 +37,25 @@ namespace Linguist.Services.Implementation
             return _usersRepository.Edit(user) > 0;
         }
 
-        public IEnumerable<Word> GetUserWords(User user)
+        public IEnumerable<Word> GetUserWords(string login)
         {
+            if (login == null)
+                throw new ArgumentNullException("Login should not be null");
+
+            User user = _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
+
             return _wordsRepository.GetAll().Where(w => w.UserId == user.UserId).ToList();
         }
 
-        public IEnumerable<Category> GetUserCategories(User user)
+        public IEnumerable<Category> GetUserCategories(string login)
         {
+            if (login == null)
+                throw new ArgumentNullException("Login should not be null");
+
+            User user = _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
+
             IEnumerable<int> categoryIds =
-                _wordsRepository.GetAll().Where(w => w.UserId == user.UserId).Select(w => w.CaregoryId);
+                _wordsRepository.GetAll().Where(w => w.UserId == user.UserId).Select(w => w.CategoryId);
 
             return _categoryRepository.GetAll().Where(c => categoryIds.Contains(c.CategoryId));
         }

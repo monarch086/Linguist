@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Linguist.DataLayer.Model;
@@ -31,10 +30,14 @@ namespace Linguist.Web.Controllers
             return View();
         }
 
-        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Login(string login, string password)
         {
-            return View();
+            //if (_accountsService.AuthenticateUser(login, password))
+            if (login.Equals("111"))
+                return Redirect(Url.Action("MyWords", "Home", new {login}));
+            
+            return Redirect(Url.Action("Start", "Account"));
         }
 
         [HttpGet]

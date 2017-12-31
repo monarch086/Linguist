@@ -11,8 +11,8 @@ namespace Linguist.Services.Interfaces
 
         bool EditUser(User user);
 
-        IEnumerable<Word> GetUserWords(User user);
+        IEnumerable<Word> GetUserWords(string login);
 
-        IEnumerable<Category> GetUserCategories(User user);
+        IEnumerable<Category> GetUserCategories(string login);
     }
 }
