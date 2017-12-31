@@ -36,9 +36,9 @@ namespace Linguist.Services.Implementation
 
             using (SHA512 shaM = new SHA512Managed())
             {
-                hash = shaM.ComputeHash(data).ToString();
+                hash = Encoding.UTF8.GetString(shaM.ComputeHash(data));
             }
-
+            
             return hash;
         }
 
