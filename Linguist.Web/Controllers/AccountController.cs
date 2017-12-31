@@ -30,11 +30,10 @@ namespace Linguist.Web.Controllers
             return View();
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         public ActionResult Login(string login, string password)
         {
-            //if (_accountsService.AuthenticateUser(login, password))
-            if (login.Equals("111"))
+            if (_accountsService.AuthenticateUser(login, password))
                 return Redirect(Url.Action("MyWords", "Home", new {login}));
             
             return Redirect(Url.Action("Start", "Account"));
@@ -47,13 +46,17 @@ namespace Linguist.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string login, string password)
+        public ActionResult Register(string login, string name, string password)
         {
+            if (login == null || password == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: login and/or password not specified");
+
             int salt = _accountsService.ComputeSalt();
 
             User user = new User
             {
                 Login = login,
+                Name = name,
                 Salt = salt,
                 Password = _accountsService.GetHashFromPassword(password, salt),
                 DateAdded = DateTime.Now,
@@ -61,9 +64,9 @@ namespace Linguist.Web.Controllers
             };
 
             if (_userService.AddUser(user))
-                return Redirect(Url.Action("MyWords", "Home"));
+                return Redirect(Url.Action("MyWords", "Home", new { login }));
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Product not found");
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: unable to add new user");
         }
 
         public ActionResult SignOut()
