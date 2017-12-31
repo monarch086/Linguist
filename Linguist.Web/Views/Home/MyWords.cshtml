@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Linguist.DataLayer.Model.Word>
 
 @{
-    ViewBag.Title = "MyWords";
+    ViewBag.Title = "Мои слова";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<h2>MyWords</h2>
+<h2>Мои слова</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавить слово", "Create")
 </p>
 <table class="table">
     <tr>
@@ -48,9 +48,8 @@
             @Html.DisplayFor(modelItem => item.DateAdded)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.WordId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.WordId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.WordId })
+            @Html.ActionLink("Изменить", "Edit", new { id=item.WordId }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.WordId })
         </td>
     </tr>
 }
