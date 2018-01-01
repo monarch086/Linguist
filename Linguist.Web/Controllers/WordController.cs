@@ -41,7 +41,7 @@ namespace Linguist.Web.Controllers
             };
 
             _wordsService.AddWord(_word);
-            return Redirect(Url.Action("MyWords", "Home", new { login }));
+            return Redirect(Url.Action("MyWords", "Home"));
         }
     }
 }
