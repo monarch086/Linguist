@@ -8,6 +8,8 @@ namespace Linguist.DataLayer.Model
 
         public int ParentCategoryId { get; set; }
 
+        public int UserId { get; set; }
+
         public string CategoryName { get; set; }
 
         public DateTime DateAdded { get; set; }
