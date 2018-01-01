@@ -30,6 +30,7 @@ GO
 CREATE TABLE [Categories] (
 	CategoryId int IDENTITY(1,1) NOT NULL,
 	ParentCategoryId int DEFAULT '0',
+	UserId int NOT NULL,
 	CategoryName nvarchar(1023) NOT NULL,
 	DateAdded datetime,
   CONSTRAINT [PK_CATEGORIES] PRIMARY KEY CLUSTERED
@@ -49,6 +50,7 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [Words] CHECK CONSTRAINT [Words_fk1]
 GO
+
 
 
 
