@@ -1,4 +1,6 @@
-﻿namespace Linguist.Services.Interfaces
+﻿using System.Web;
+
+namespace Linguist.Services.Interfaces
 {
     public interface IAccountsService
     {
@@ -7,5 +9,7 @@
         string GetHashFromPassword(string password, int salt);
 
         int ComputeSalt();
+
+        string GetUserName(HttpContext context);
     }
 }

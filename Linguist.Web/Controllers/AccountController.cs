@@ -22,7 +22,7 @@ namespace Linguist.Web.Controllers
         [HttpGet]
         public ActionResult Start()
         {
-            var login = GetUserName();
+            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
             if (!string.IsNullOrEmpty(login))
                 return Redirect(Url.Action("MyWords", "Home"));
 
@@ -91,17 +91,7 @@ namespace Linguist.Web.Controllers
 
         public string GetUserName()
         {
-            try
-            {
-                string cookieName = FormsAuthentication.FormsCookieName; //Find cookie name
-                HttpCookie authCookie = HttpContext.Request.Cookies[cookieName]; //Get the cookie by it's name
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value); //Decrypt it
-                return ticket.Name;
-            }
-            catch (NullReferenceException)
-            {
-                return string.Empty;
-            }
+            return _accountsService.GetUserName(System.Web.HttpContext.Current);
         }
 
         public ActionResult SignOut()

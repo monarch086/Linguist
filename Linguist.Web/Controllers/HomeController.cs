@@ -8,12 +8,13 @@ namespace Linguist.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
 
-        public HomeController(IUsersService userService, AccountController accountController)
+        public HomeController(IAccountsService accountsService, IUsersService userService)
         {
+            _accountsService = accountsService;
             _userService = userService;
-
             
             //get instance of AccountController
             //_accountController = DependencyResolver.Current.GetService<AccountController>();
@@ -22,7 +23,7 @@ namespace Linguist.Web.Controllers
 
         public ActionResult MyWords()
         {
-            var login = GetUserName();
+            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
 
             if (string.IsNullOrEmpty(login))
                 return Redirect(Url.Action("Start", "Account"));
@@ -50,21 +51,6 @@ namespace Linguist.Web.Controllers
         public ActionResult Options()
         {
             return View();
-        }
-
-        private string GetUserName()
-        {
-            try
-            {
-                string cookieName = FormsAuthentication.FormsCookieName; //Find cookie name
-                HttpCookie authCookie = HttpContext.Request.Cookies[cookieName]; //Get the cookie by it's name
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value); //Decrypt it
-                return ticket.Name;
-            }
-            catch (NullReferenceException)
-            {
-                return string.Empty;
-            }
         }
     }
 }

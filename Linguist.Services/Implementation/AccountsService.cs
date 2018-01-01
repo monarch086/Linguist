@@ -50,5 +50,20 @@ namespace Linguist.Services.Implementation
             int salt = random.Next(1, 1000000);
             return salt;
         }
+
+        public string GetUserName(HttpContext context)
+        {
+            try
+            {
+                string cookieName = FormsAuthentication.FormsCookieName; //Find cookie name
+                HttpCookie authCookie = context.Request.Cookies[cookieName]; //Get the cookie by it's name
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value); //Decrypt it
+                return ticket.Name;
+            }
+            catch (NullReferenceException)
+            {
+                return string.Empty;
+            }
+        }
     }
 }
