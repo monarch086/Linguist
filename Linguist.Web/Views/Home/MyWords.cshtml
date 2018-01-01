@@ -7,51 +7,63 @@
 
 <h2>Мои слова</h2>
 
-<p>
-    @Html.ActionLink("Добавить слово", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OriginalWord)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Translation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </th>
-        <th></th>
-    </tr>
+<h5>Вы вошли как @Html.Action("GetUserName", "Account")</h5>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OriginalWord)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Translation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateAdded)
-        </td>
-        <td>
-            @Html.ActionLink("Изменить", "Edit", new { id=item.WordId }) |
-            @Html.ActionLink("Удалить", "Delete", new { id=item.WordId })
-        </td>
-    </tr>
-}
+<div class="col-md-8 col-md-offset-2">
+    
+    <p>
+        <div class="col-md-6">
+            @Html.ActionLink("Добавить слово", "Add", "Word")
+        </div>
+        <div class="col-md-6">
+            @Html.ActionLink("Добавить группу", "Add", "Category")
+        </div>
+    </p>
+    
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginalWord)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Translation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginalWord)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Translation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAdded)
+                </td>
+                <td>
+                    @Html.ActionLink("Изменить", "Edit", new { id = item.WordId }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.WordId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
