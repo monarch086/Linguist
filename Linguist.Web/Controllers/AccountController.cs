@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Linguist.DataLayer.Model;
@@ -21,6 +22,10 @@ namespace Linguist.Web.Controllers
         [HttpGet]
         public ActionResult Start()
         {
+            var login = GetUserName();
+            if (!string.IsNullOrEmpty(login))
+                return Redirect(Url.Action("MyWords", "Home"));
+
             return View();
         }
 
@@ -34,8 +39,11 @@ namespace Linguist.Web.Controllers
         public ActionResult Login(string login, string password)
         {
             if (_accountsService.AuthenticateUser(login, password))
-                return Redirect(Url.Action("MyWords", "Home", new {login}));
-            
+            {
+                CreateCookie(login);
+                return Redirect(Url.Action("MyWords", "Home"));
+            }
+
             return Redirect(Url.Action("Start", "Account"));
         }
 
@@ -64,9 +72,36 @@ namespace Linguist.Web.Controllers
             };
 
             if (_userService.AddUser(user))
-                return Redirect(Url.Action("MyWords", "Home", new { login }));
+            {
+                CreateCookie(login);
+                return Redirect(Url.Action("MyWords", "Home"));
+            }
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: unable to add new user");
+        }
+
+        private void CreateCookie(string login)
+        {
+            // Create the authentication cookie
+            HttpCookie authCookie = FormsAuthentication.GetAuthCookie(login, true);
+            authCookie.Expires = DateTime.Now.AddDays(10);
+            // Add the cookie to the response
+            Response.Cookies.Add(authCookie);
+        }
+
+        public string GetUserName()
+        {
+            try
+            {
+                string cookieName = FormsAuthentication.FormsCookieName; //Find cookie name
+                HttpCookie authCookie = HttpContext.Request.Cookies[cookieName]; //Get the cookie by it's name
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value); //Decrypt it
+                return ticket.Name;
+            }
+            catch (NullReferenceException)
+            {
+                return string.Empty;
+            }
         }
 
         public ActionResult SignOut()
