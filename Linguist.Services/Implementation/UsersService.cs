@@ -37,6 +37,11 @@ namespace Linguist.Services.Implementation
             return _usersRepository.Edit(user) > 0;
         }
 
+        public User GetUserByLogin(string login)
+        {
+            return _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
+        }
+
         public IEnumerable<Word> GetUserWords(string login)
         {
             if (login == null)
