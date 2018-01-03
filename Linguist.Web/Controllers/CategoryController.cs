@@ -30,13 +30,15 @@ namespace Linguist.Web.Controllers
         {
             if (!string.IsNullOrEmpty(category.CategoryName))
             {
-                //var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
-                //var user = _userService.GetUserByLogin(login);
+                var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+                var user = _userService.GetUserByLogin(login);
 
+                category.UserId = user.UserId;
                 category.DateAdded = DateTime.Now;
                 category.ParentCategoryId = 0;
 
                 _categoriesService.AddCategory(category);
+
             }
 
             return Redirect(Url.Action("MyWords", "Home"));
