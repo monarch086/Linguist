@@ -1,6 +1,5 @@
 CREATE TABLE [Words] (
 	WordId int IDENTITY(1,1) NOT NULL,
-	CategoryId int NOT NULL,
 	UserId int NOT NULL,
 	OriginalWord nvarchar(512) NOT NULL,
 	Translation nvarchar(512) NOT NULL,
@@ -40,16 +39,24 @@ CREATE TABLE [Categories] (
 
 )
 GO
-ALTER TABLE [Words] WITH CHECK ADD CONSTRAINT [Words_fk0] FOREIGN KEY ([CategoryId]) REFERENCES [Categories]([CategoryId])
+CREATE TABLE [CatWordRelations] (
+	CatWordRelationId int IDENTITY(1,1) NOT NULL,
+	CategoryId int NOT NULL,
+	WordId int NOT NULL,
+  CONSTRAINT [PK_CATWORDRELATIONS] PRIMARY KEY CLUSTERED
+  (
+  [CatWordRelationId] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+
+ALTER TABLE [Words] WITH CHECK ADD CONSTRAINT [Words_fk0] FOREIGN KEY ([UserId]) REFERENCES [Users]([UserId])
 ON UPDATE CASCADE
 GO
 ALTER TABLE [Words] CHECK CONSTRAINT [Words_fk0]
 GO
-ALTER TABLE [Words] WITH CHECK ADD CONSTRAINT [Words_fk1] FOREIGN KEY ([UserId]) REFERENCES [Users]([UserId])
-ON UPDATE CASCADE
-GO
-ALTER TABLE [Words] CHECK CONSTRAINT [Words_fk1]
-GO
+
 
 
 
