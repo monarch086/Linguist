@@ -10,12 +10,14 @@ namespace Linguist.Web.Controllers
         private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
         private readonly IWordsService _wordsService;
+        private readonly ICategoriesService _categoriesService;
 
-        public WordController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService)
+        public WordController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, ICategoriesService categoriesService)
         {
             _userService = userService;
             _wordsService = wordsService;
             _accountsService = accountsService;
+            _categoriesService = categoriesService;
         }
 
         [HttpGet]
@@ -36,11 +38,10 @@ namespace Linguist.Web.Controllers
                 UserId = user.UserId,
                 OriginalWord = word,
                 Translation = translation,
-                CategoryId = categoryId,
                 DateAdded = DateTime.Now
             };
 
-            _wordsService.AddWord(_word);
+            _wordsService.AddWord(_word, categoryId);
             return Redirect(Url.Action("MyWords", "Home"));
         }
     }

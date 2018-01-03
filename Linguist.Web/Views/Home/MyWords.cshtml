@@ -23,19 +23,13 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
+                @Html.DisplayName("Слово")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                @Html.DisplayName("Перевод")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OriginalWord)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Translation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateAdded)
+                @Html.DisplayName("Дата")
             </th>
             <th></th>
         </tr>
@@ -43,12 +37,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OriginalWord)
                 </td>

@@ -17,7 +17,7 @@ namespace Linguist.Services.Implementation
             _relationsRepository = relationsRepository;
         }
 
-        public bool AddWord(Word word, Category category)
+        public bool AddWord(Word word, int categoryId)
         {
             if(_wordsRepository.Add(word) == 0)
                 return false;
@@ -25,7 +25,7 @@ namespace Linguist.Services.Implementation
             if (_relationsRepository.Add(new CatWordRelation
             {
                 WordId = word.WordId,
-                CategoryId = category.CategoryId
+                CategoryId = categoryId
             }) == 0)
                 return false;
             return true;

@@ -4,7 +4,7 @@ namespace Linguist.Services.Interfaces
 {
     public interface IWordsService
     {
-        bool AddWord(Word word, Category category);
+        bool AddWord(Word word, int categoryId);
 
         bool EditWord(Word word);
 

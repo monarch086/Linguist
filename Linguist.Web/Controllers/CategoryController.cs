@@ -43,5 +43,13 @@ namespace Linguist.Web.Controllers
 
             return Redirect(Url.Action("MyWords", "Home"));
         }
+
+        //[HttpGet]
+        //public JsonResult GetUserCategories()
+        //{
+        //    var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+
+        //    return _userService.GetUserCategories(login);
+        //}
     }
 }
