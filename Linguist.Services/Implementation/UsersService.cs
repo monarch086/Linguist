@@ -29,7 +29,7 @@ namespace Linguist.Services.Implementation
 
         public bool RemoveUser(User user)
         {
-            return _usersRepository.Remove(user) > 0;
+            return _usersRepository.Remove(user.UserId) > 0;
         }
 
         public bool EditUser(User user)
@@ -59,10 +59,7 @@ namespace Linguist.Services.Implementation
 
             User user = _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
 
-            IEnumerable<int> categoryIds =
-                _wordsRepository.GetAll().Where(w => w.UserId == user.UserId).Select(w => w.CategoryId);
-
-            return _categoryRepository.GetAll().Where(c => categoryIds.Contains(c.CategoryId));
+            return _categoryRepository.GetAll().Where(c => c.UserId == user.UserId);
         }
     }
 }

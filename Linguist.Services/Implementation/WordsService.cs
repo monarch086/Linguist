@@ -33,12 +33,22 @@ namespace Linguist.Services.Implementation
 
         public bool EditWord(Word word)
         {
-            return true;
+            if(_wordsRepository.Edit(word) > 0)
+                return true;
+            return false;
         }
 
         public bool RemoveWord(Word word)
         {
-            return true;
+            var relationIds = _relationsRepository.GetAll().Where(r => r.WordId == word.WordId).Select(r => r.CatWordRelationId);
+            foreach (var relationId in relationIds)
+            {
+                _relationsRepository.Remove(relationId);
+            }
+
+            if(_wordsRepository.Remove(word.WordId) > 0)
+                return true;
+            return false;
         }
     }
 }
