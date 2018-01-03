@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Linq;
 using Linguist.DataLayer.Context;
 using Linguist.DataLayer.Model;
 using Linguist.DataLayer.UnitOfWork;
@@ -35,9 +36,11 @@ namespace Linguist.DataLayer.Repositories
             return _context.Categories;
         }
 
-        public int Remove(Category entity)
+        public int Remove(int entityId)
         {
-            _context.Categories.Remove(entity);
+            var category = _context.Categories.FirstOrDefault(c => c.CategoryId == entityId);
+            if (category != null)
+                _context.Categories.Remove(category);
             return _unitOfWork.Save();
         }
     }

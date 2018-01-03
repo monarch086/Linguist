@@ -12,5 +12,7 @@ namespace Linguist.DataLayer.Context
         public DbSet<Word> Words { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<CatWordRelation> CatWordRelations { get; set; }
     }
 }

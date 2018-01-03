@@ -10,6 +10,6 @@ namespace Linguist.DataLayer.Repositories
 
         int Edit(T entity);
 
-        int Remove(T entity);
+        int Remove(int entityId);
     }
 }

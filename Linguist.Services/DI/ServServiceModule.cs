@@ -11,6 +11,7 @@ namespace Linguist.Services.DI
             Bind<IRepository<User>>().To<UsersRepository>();
             Bind<IRepository<Word>>().To<WordsRepository>();
             Bind<IRepository<Category>>().To<CategoriesRepository>();
+            Bind<IRepository<CatWordRelation>>().To<CatWordRelationsRepository>();
         }
     }
 }

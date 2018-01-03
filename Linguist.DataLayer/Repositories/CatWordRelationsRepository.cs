@@ -1,46 +1,46 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using Linguist.DataLayer.Model;
 using Linguist.DataLayer.Context;
+using Linguist.DataLayer.Model;
 using Linguist.DataLayer.UnitOfWork;
 
 namespace Linguist.DataLayer.Repositories
 {
-    public class WordsRepository : IRepository<Word>
+    public class CatWordRelationsRepository : IRepository<CatWordRelation>
     {
         private readonly LinguistContext _context;
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public WordsRepository(LinguistContext context)
+        public CatWordRelationsRepository(LinguistContext context)
         {
             _context = context;
             _unitOfWork = new UnitOfWork.UnitOfWork(context);
         }
 
-        public int Add(Word entity)
+        public int Add(CatWordRelation entity)
         {
-            _context.Words.Add(entity);
+            _context.CatWordRelations.Add(entity);
             return _unitOfWork.Save();
         }
 
-        public int Edit(Word entity)
+        public int Edit(CatWordRelation entity)
         {
-            _context.Words.AddOrUpdate(entity);
+            _context.CatWordRelations.AddOrUpdate(entity);
             return _unitOfWork.Save();
         }
 
-        public IEnumerable<Word> GetAll()
+        public IEnumerable<CatWordRelation> GetAll()
         {
-            return _context.Words;
+            return _context.CatWordRelations;
         }
 
         public int Remove(int entityId)
         {
-            var word = _context.Words.FirstOrDefault(w => w.WordId == entityId);
-            if (word != null)
-                _context.Words.Remove(word);
+            var relation = _context.CatWordRelations.FirstOrDefault(r => r.CatWordRelationId == entityId);
+            if (relation != null)
+                _context.CatWordRelations.Remove(relation);
             return _unitOfWork.Save();
         }
     }
