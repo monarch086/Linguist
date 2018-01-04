@@ -33,16 +33,6 @@ namespace Linguist.Web.Controllers
             return View(words);
         }
 
-        public ActionResult Train()
-        {
-            return View();
-        }
-
-        public ActionResult Test()
-        {
-            return View();
-        }
-
         public ActionResult Statistics()
         {
             return View();

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Linguist: Тренировка";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<h2>Тренировка</h2>
+
+<div class="col-md-8 col-md-offset-2">
+        
+    <hr />
+    <p>
+        @Html.ActionLink("Все слова", "AllWords", "Training")
+    </p>
+    <p>
+        @Html.ActionLink("Слова категории: ", "CategoryWords", "Training")
+    </p>
+    
+</div>
