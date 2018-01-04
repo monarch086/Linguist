@@ -35,7 +35,7 @@ namespace Linguist.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(string word, string translation, int categoryId)
+        public ActionResult Add(int categoryId, string originalWord, string translation)
         {
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
 
@@ -44,7 +44,7 @@ namespace Linguist.Web.Controllers
             Word _word = new Word
             {
                 UserId = user.UserId,
-                OriginalWord = word,
+                OriginalWord = originalWord,
                 Translation = translation,
                 DateAdded = DateTime.Now
             };
