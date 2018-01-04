@@ -2,7 +2,6 @@
 using Linguist.Services.Interfaces;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
-using Newtonsoft.Json;
 
 namespace Linguist.Web.Controllers
 {
@@ -43,17 +42,6 @@ namespace Linguist.Web.Controllers
             }
 
             return Redirect(Url.Action("MyWords", "Home"));
-        }
-
-        [HttpGet]
-        public JsonResult GetUserCategories()
-        {
-            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
-
-            var categories = _userService.GetUserCategories(login);
-
-            string jsonList = JsonConvert.SerializeObject(categories, Formatting.None);
-            return Json(jsonList, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
@@ -23,6 +24,13 @@ namespace Linguist.Web.Controllers
         [HttpGet]
         public ActionResult Add()
         {
+            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+            ViewBag.CategoriesListItems = _userService.GetUserCategories(login).Select(i => new SelectListItem
+            {
+                Text = i.CategoryName,
+                Value = i.CategoryId.ToString()
+            }).ToList();
+
             return View();
         }
 

@@ -1,0 +1,10 @@
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Выберите категорию
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            @foreach (var item in ViewBag.CategoriesListItems)
+                            {
+                                <li><a href="#">@item.Text</a></li>
+                            }
+                        </ul>
+                    </div>
