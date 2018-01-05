@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Linguist.Services.Interfaces;
 
 namespace Linguist.Web.Controllers
@@ -24,6 +25,8 @@ namespace Linguist.Web.Controllers
         public ActionResult AllWords()
         {
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+            var words = _userService.GetUserWords(login).ToList();
+            ViewBag.Words = words;
 
             return View();
         }
