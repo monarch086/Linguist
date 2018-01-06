@@ -1,7 +1,6 @@
-﻿using System;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.Security;
+using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
 
 namespace Linguist.Web.Controllers
@@ -10,25 +9,31 @@ namespace Linguist.Web.Controllers
     {
         private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
+        private readonly IWordsService _wordsService;
 
-        public HomeController(IAccountsService accountsService, IUsersService userService)
+        public HomeController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService)
         {
             _accountsService = accountsService;
             _userService = userService;
-            
-            //get instance of AccountController
-            //_accountController = DependencyResolver.Current.GetService<AccountController>();
-            //_accountController.ControllerContext = new ControllerContext(this.Request.RequestContext, _accountController);
+            _wordsService = wordsService;
         }
 
-        public ActionResult MyWords()
+        public ActionResult MyWords(int categoryId = 0)
         {
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
 
             if (string.IsNullOrEmpty(login))
                 return Redirect(Url.Action("Start", "Account"));
 
-            var words = _userService.GetUserWords(login);
+            IEnumerable<Word> words;
+
+            if (categoryId == 0)
+                words = _userService.GetUserWords(login);
+
+            else
+            {
+                words = _wordsService.GetWordsByCategory(categoryId);
+            }
 
             return View(words);
         }

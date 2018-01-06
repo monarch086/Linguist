@@ -2,6 +2,7 @@
 using Linguist.Services.Interfaces;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
+using Linguist.Web.Models;
 
 namespace Linguist.Web.Controllers
 {
@@ -17,7 +18,6 @@ namespace Linguist.Web.Controllers
             _userService = userService;
             _categoriesService = categoriesService;
         }
-
 
         [HttpGet]
         public ActionResult Add()
@@ -42,6 +42,20 @@ namespace Linguist.Web.Controllers
             }
 
             return Redirect(Url.Action("MyWords", "Home"));
+        }
+
+        public PartialViewResult CategoryMenu(int categoryId = 0)
+        {
+            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+            var categories = _userService.GetUserCategories(login);
+
+            CategoryViewModel model = new CategoryViewModel
+            {
+                Categories = categories,
+                CurrentCategoryId = categoryId
+            };
+
+            return PartialView(model);
         }
     }
 }

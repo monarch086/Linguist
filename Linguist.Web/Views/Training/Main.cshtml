@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Linguist: Тренировка";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
@@ -10,10 +9,12 @@
         
     <hr />
     <p>
-        @Html.ActionLink("Все слова", "AllWords", "Training")
+        @Html.ActionLink("Все слова", "AllWords", "Training", null, new { @class = "btn btn-default" })
     </p>
     <p>
-        @Html.ActionLink("Слова категории: ", "CategoryWords", "Training")
+        @Html.ActionLink("Слова категории", "CategoryWords", "Training", null, new { @class = "btn btn-default" })
     </p>
-    
+    <p>
+        @Html.ActionLink("Новые слова", "LastWords", "Training", null, new { @class = "btn btn-default" })
+    </p>
 </div>

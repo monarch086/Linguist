@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Linguist.DataLayer.Model;
 using Linguist.DataLayer.Repositories;
 using Linguist.Services.Interfaces;
@@ -49,6 +50,13 @@ namespace Linguist.Services.Implementation
             if(_wordsRepository.Remove(word.WordId) > 0)
                 return true;
             return false;
+        }
+
+        public IEnumerable<Word> GetWordsByCategory(int categoryId)
+        {
+            var wordsIds = _relationsRepository.GetAll().Where(r => r.CategoryId == categoryId).Select(r => r.WordId);
+            var words = _wordsRepository.GetAll().Where(w => wordsIds.Contains(w.WordId));
+            return words;
         }
     }
 }

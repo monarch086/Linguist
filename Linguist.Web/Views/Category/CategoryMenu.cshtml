@@ -1,0 +1,23 @@
+﻿@model Linguist.Web.Models.CategoryViewModel
+    
+<div style="margin-left: 20px;">
+    @Html.ActionLink("Все слова", "MyWords", "Home", null,
+        new
+        {
+            @class = "btn btn-block btn-default btn-lg"
+        })
+
+    @foreach (var category in Model.Categories)
+    {
+        @Html.RouteLink(category.CategoryName, new
+        {
+            controller = "Home",
+            action = "MyWords",
+            categoryId = category.CategoryId
+        }, new
+        {
+            @class = ("btn btn-block btn-default btn-lg")
+                     + (category.CategoryId == Model.CurrentCategoryId ? " btn-primary" : "")
+        })
+    }
+</div>

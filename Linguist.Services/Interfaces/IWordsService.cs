@@ -1,4 +1,5 @@
-﻿using Linguist.DataLayer.Model;
+﻿using System.Collections.Generic;
+using Linguist.DataLayer.Model;
 
 namespace Linguist.Services.Interfaces
 {
@@ -9,5 +10,7 @@ namespace Linguist.Services.Interfaces
         bool EditWord(Word word);
 
         bool RemoveWord(Word word);
+
+        IEnumerable<Word> GetWordsByCategory(int categoryId);
     }
 }

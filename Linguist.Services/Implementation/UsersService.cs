@@ -15,7 +15,8 @@ namespace Linguist.Services.Implementation
 
         private readonly IRepository<Category> _categoryRepository;
 
-        public UsersService(IRepository<User> usersRepository, IRepository<Word> wordsRepository, IRepository<Category> categoryRepository)
+        public UsersService(IRepository<User> usersRepository, IRepository<Word> wordsRepository, 
+            IRepository<Category> categoryRepository)
         {
             _usersRepository = usersRepository;
             _wordsRepository = wordsRepository;

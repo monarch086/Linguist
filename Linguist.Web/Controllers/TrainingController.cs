@@ -34,5 +34,10 @@ namespace Linguist.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult LastWords(int quantityOfWords)
+        {
+            return View();
+        }
     }
 }
