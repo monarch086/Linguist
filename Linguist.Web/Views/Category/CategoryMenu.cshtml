@@ -20,4 +20,10 @@
                      + (category.CategoryId == Model.CurrentCategoryId ? " btn-primary" : "")
         })
     }
+    
+    @Html.ActionLink("Добавить словарь", "Add", "Category", null,
+        new
+        {
+            @class = "btn btn-block btn-default btn-lg"
+        })
 </div>
