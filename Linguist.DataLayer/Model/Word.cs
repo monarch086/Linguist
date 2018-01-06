@@ -13,5 +13,7 @@ namespace Linguist.DataLayer.Model
         public string Translation { get; set; }
 
         public DateTime DateAdded { get; set; }
+
+        public int RememberIndex { get; set; }
     }
 }

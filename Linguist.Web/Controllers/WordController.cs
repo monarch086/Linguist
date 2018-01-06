@@ -45,7 +45,8 @@ namespace Linguist.Web.Controllers
                 UserId = user.UserId,
                 OriginalWord = originalWord,
                 Translation = translation,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                RememberIndex = 0
             };
 
             _wordsService.AddWord(_word, categoryId);
