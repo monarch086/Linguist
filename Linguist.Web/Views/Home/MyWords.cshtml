@@ -53,8 +53,8 @@
                         @Html.DisplayFor(modelItem => item.DateAdded)
                     </td>
                     <td>
-                        @Html.ActionLink("Изменить", "Edit", new { id = item.WordId }) |
-                        @Html.ActionLink("Удалить", "Delete", new { id = item.WordId })
+                        @Html.ActionLink("Изменить", "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
+                        @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
                     </td>
                 </tr>
             }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
+using System.Net;
 
 namespace Linguist.Web.Controllers
 {
@@ -49,6 +50,19 @@ namespace Linguist.Web.Controllers
 
             _wordsService.AddWord(_word, categoryId);
             return Redirect(Url.Action("MyWords", "Home"));
+        }
+
+        public ActionResult Remove(int wordId, string returnUrl)
+        {
+            if (_wordsService.RemoveWord(wordId))
+                return Redirect(returnUrl);
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: word can not be deleted");
+        }
+
+        public ActionResult Edit(int wordId, string returnUrl)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: word can not be edited");
         }
     }
 }

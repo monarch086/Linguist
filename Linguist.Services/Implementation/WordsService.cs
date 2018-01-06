@@ -39,15 +39,15 @@ namespace Linguist.Services.Implementation
             return false;
         }
 
-        public bool RemoveWord(Word word)
+        public bool RemoveWord(int wordId)
         {
-            var relationIds = _relationsRepository.GetAll().Where(r => r.WordId == word.WordId).Select(r => r.CatWordRelationId);
+            var relationIds = _relationsRepository.GetAll().Where(r => r.WordId == wordId).Select(r => r.CatWordRelationId).ToList();
             foreach (var relationId in relationIds)
             {
                 _relationsRepository.Remove(relationId);
             }
 
-            if(_wordsRepository.Remove(word.WordId) > 0)
+            if(_wordsRepository.Remove(wordId) > 0)
                 return true;
             return false;
         }

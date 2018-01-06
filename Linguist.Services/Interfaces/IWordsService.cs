@@ -9,7 +9,7 @@ namespace Linguist.Services.Interfaces
 
         bool EditWord(Word word);
 
-        bool RemoveWord(Word word);
+        bool RemoveWord(int wordId);
 
         IEnumerable<Word> GetWordsByCategory(int categoryId);
     }
