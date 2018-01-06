@@ -18,8 +18,8 @@
         <img src="~/Resources/navigate-left.png" id="left" /> 
     </div>
     
-    <div id="center" class="col-md-4 col-sm-4 col-xs-4">
-        <img src="~/Resources/paper.png" />
+    <div class="col-md-4 col-sm-4 col-xs-4">
+        <img src="~/Resources/paper.png" id="card"/>
         <div id="word"></div>        
     </div>
     
@@ -32,6 +32,6 @@
 
 <script>
     var words = @Html.Raw(Json.Encode(Model));
-    
 </script>
+
 <script src="~/Scripts/trainingController.js"></script>

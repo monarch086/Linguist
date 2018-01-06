@@ -180,7 +180,7 @@
     <Content Include="Views\Word\Add.cshtml" />
     <Content Include="Views\Category\Add.cshtml" />
     <Content Include="Views\Training\Main.cshtml" />
-    <Content Include="Views\Training\AllWords.cshtml" />
+    <Content Include="Views\Training\Training.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

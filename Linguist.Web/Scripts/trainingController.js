@@ -28,7 +28,8 @@ function clickHandler(event) {
     else if (pressedElement === document.getElementById("right"))
         moveRight();
 
-    else if (pressedElement === document.getElementById("translationBtn"))
+    else if (pressedElement === document.getElementById("translationBtn") ||
+        pressedElement === document.getElementById("card"))
         showTranslation();
 }
 
@@ -37,6 +38,7 @@ function moveLeft() {
         currentPosition--;
         loadWord();
         updateCounter();
+        resetTranslations();
     }
 }
 
@@ -45,6 +47,7 @@ function moveRight() {
         currentPosition++;
         loadWord();
         updateCounter();
+        resetTranslations();
     }
 }
 
@@ -67,4 +70,9 @@ function loadWord() {
 
 function updateCounter() {
     counter.innerHTML = 'Все слова (' + (currentPosition + 1) + '/' + words.length + ')';
+}
+
+function resetTranslations() {
+    translationBtn.innerHTML = 'Показать перевод';
+    isTranslation = false;
 }
