@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Linguist.DataLayer.Model.Word>
+
 <link href="~/Content/TrainStyles.css" rel="stylesheet" />
 
 @{
@@ -7,7 +8,7 @@
 }
 
 <h2>Тренировка</h2>
-<h3>Все слова</h3>
+<h3 id="counter">Все слова</h3>
 
 <hr/>
 <br/>
@@ -19,15 +20,18 @@
     
     <div id="center" class="col-md-4 col-sm-4 col-xs-4">
         <img src="~/Resources/paper.png" />
-        <div id="word">
-            <h3>Слово</h3>
-        </div>        
+        <div id="word"></div>        
     </div>
     
     <div class="col-md-4 col-sm-4 col-xs-4">
         <img src="~/Resources/navigate-right.png" id="right" />
     </div>
-    
-    <input type="button" class="btn btn-default" value="Показать перевод" />
+
+    <button name="button" id="translationBtn" class="btn btn-default">Показать перевод</button>
 </div>
 
+<script>
+    var words = @Html.Raw(Json.Encode(Model));
+    
+</script>
+<script src="~/Scripts/trainingController.js"></script>

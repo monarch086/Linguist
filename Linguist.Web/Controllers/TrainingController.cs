@@ -26,9 +26,9 @@ namespace Linguist.Web.Controllers
         {
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
             var words = _userService.GetUserWords(login).ToList();
-            ViewBag.Words = words;
+            //ViewBag.Words = words;
 
-            return View();
+            return View(words);
         }
 
         public ActionResult CategoryWords(int categoryId)
