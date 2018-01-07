@@ -34,7 +34,7 @@
                 <th class="text-center">
                     @Html.DisplayName("Перевод")
                 </th>
-                <th class="text-center">
+                <th class="text-center hidden-xs">
                     @Html.DisplayName("Дата")
                 </th>
                 <th></th>
@@ -49,7 +49,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Translation)
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                         @Html.DisplayFor(modelItem => item.DateAdded)
                     </td>
                     <td>
