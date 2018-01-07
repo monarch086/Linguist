@@ -5,7 +5,7 @@ namespace Linguist.DataLayer.Context
 {
     public class LinguistContext : DbContext
     {
-        public LinguistContext() : base("LinguistConnectionString_Home") { }
+        public LinguistContext() : base("LinguistConnectionString") { }
 
         public DbSet<User> Users { get; set; }
 
