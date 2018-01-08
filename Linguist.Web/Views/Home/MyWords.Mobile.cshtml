@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Linguist.DataLayer.Model.Word>
 
+<link href="~/Content/MyWordsMobileStyles.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Linguist: Мои слова";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
@@ -16,16 +18,16 @@
             @Html.Action("CategoryMenu", "Category", new { mobile = true })
         </p>
         <p>
-                @Html.ActionLink("Добавить слово", "Add", "Word", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Добавить слово", "Add", "Word", null, new { @class = "btn btn-default large" })
         </p>
 
         <table class="table well">
             <tr>
                 <th class="text-center">
-                    <h3><b>@Html.DisplayName("Слово")</b></h3>
+                    <h4><b>@Html.DisplayName("Слово")</b></h4>
                 </th>
                 <th class="text-center">
-                    <h3><b>@Html.DisplayName("Перевод")</b></h3>
+                    <h4><b>@Html.DisplayName("Перевод")</b></h4>
                 </th>
                 <th></th>
             </tr>
@@ -34,13 +36,13 @@
             {
                 <tr>
                     <td>
-                        <h3>@Html.ActionLink(item.OriginalWord, "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h3>
+                        <h4>@Html.ActionLink(item.OriginalWord, "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h4>
                     </td>
                     <td>
-                        <h3>@Html.DisplayFor(modelItem => item.Translation)</h3>
+                        <h4>@Html.DisplayFor(modelItem => item.Translation)</h4>
                     </td>
                     <td>
-                        <h3>@Html.ActionLink("Удалить", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h3>
+                        <h4>@Html.ActionLink("Удалить", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h4>
                     </td>
                 </tr>
             }

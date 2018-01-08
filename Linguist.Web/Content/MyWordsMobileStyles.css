@@ -1,0 +1,11 @@
+﻿/*center dropdown menu of categories*/
+.dropdown-menu {
+    left: 50%;
+    right: auto;
+    text-align: center;
+    transform: translate(-50%, 0);
+}
+
+a, .large {
+    font-size: large;
+}
