@@ -38,15 +38,14 @@
             {
                 <tr>
                     <td>
-                        <h3>@Html.DisplayFor(modelItem => item.OriginalWord)</h3>
+                        <h3>@Html.ActionLink(item.OriginalWord, "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h3>
                     </td>
                     <td>
                         <h3>@Html.DisplayFor(modelItem => item.Translation)</h3>
                     </td>
                     <td>
-                        <h3>@Html.ActionLink("Изменить", "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h3>
                         <h3>@Html.ActionLink("Удалить", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h3>
-</td>
+                    </td>
                 </tr>
             }
 

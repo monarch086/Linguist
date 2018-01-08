@@ -12,5 +12,7 @@ namespace Linguist.Services.Interfaces
         bool RemoveCategory(Category category);
 
         IEnumerable<Category> GetCategories();
+
+        IEnumerable<int> GetCategoriesIdsByWordId(int wordId);
     }
 }

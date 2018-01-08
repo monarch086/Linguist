@@ -58,5 +58,11 @@ namespace Linguist.Services.Implementation
             var words = _wordsRepository.GetAll().Where(w => wordsIds.Contains(w.WordId));
             return words;
         }
+
+        public Word GetWordById(int wordId)
+        {
+            var word = _wordsRepository.GetAll().FirstOrDefault(w => w.WordId == wordId);
+            return word;
+        }
     }
 }

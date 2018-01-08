@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
@@ -12,23 +13,20 @@ namespace Linguist.Web.Controllers
         private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
         private readonly IWordsService _wordsService;
+        private readonly ICategoriesService _categoriesService;
 
-        public WordController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService)
+        public WordController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, ICategoriesService categoriesService)
         {
             _userService = userService;
             _wordsService = wordsService;
             _accountsService = accountsService;
+            _categoriesService = categoriesService;
         }
 
         [HttpGet]
         public ActionResult Add()
         {
-            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
-            ViewBag.CategoriesListItems = _userService.GetUserCategories(login).Select(i => new SelectListItem
-            {
-                Text = i.CategoryName,
-                Value = i.CategoryId.ToString()
-            }).ToList();
+            ViewBag.CategoriesListItems = GetUserCategoriesAsSelectList();
 
             return View();
         }
@@ -63,7 +61,27 @@ namespace Linguist.Web.Controllers
 
         public ActionResult Edit(int wordId, string returnUrl)
         {
+            Word word = _wordsService.GetWordById(wordId);
+
+            if (word != null)
+            {
+                var categoriesIds = _categoriesService.GetCategoriesIdsByWordId(wordId);
+                ViewBag.CategoriesListItems = GetUserCategoriesAsSelectList(categoriesIds.FirstOrDefault());
+                return View("~/Views/Word/Add.cshtml", word);
+            }
+
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: word can not be edited");
+        }
+
+        private IEnumerable<SelectListItem> GetUserCategoriesAsSelectList(int selectedCategoryId = 0)
+        {
+            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+            return _userService.GetUserCategories(login).Select(i => new SelectListItem
+            {
+                Text = i.CategoryName,
+                Value = i.CategoryId.ToString(),
+                Selected = i.CategoryId == selectedCategoryId
+            }).ToList();
         }
     }
 }
