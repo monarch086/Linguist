@@ -10,17 +10,13 @@
 <h5>Вы вошли как @Html.Action("GetUserName", "Account")</h5>
 
 <div class="row">
-
-    <div id="genres" class="col-md-3 col-sm-3 hidden-xs" style="min-width: 250px">
-        @Html.Action("CategoryMenu", "Category")
-    </div>
-
-    <div class="col-md-7 col-sm-7">
+    <div class="col-sm-7 col-xs-12">
         
         <p>
-            <div class="col-md-6">
+            @Html.Action("CategoryMenu", "Category", new { mobile = true })
+        </p>
+        <p>
                 @Html.ActionLink("Добавить слово", "Add", "Word", null, new { @class = "btn btn-default" })
-            </div>
         </p>
 
         <table class="table well">

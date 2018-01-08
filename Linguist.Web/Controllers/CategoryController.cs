@@ -44,7 +44,7 @@ namespace Linguist.Web.Controllers
             return Redirect(Url.Action("MyWords", "Home"));
         }
 
-        public PartialViewResult CategoryMenu(int categoryId = 0)
+        public PartialViewResult CategoryMenu(int categoryId = 0, bool mobile = false)
         {
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
             var categories = _userService.GetUserCategories(login);
@@ -54,6 +54,9 @@ namespace Linguist.Web.Controllers
                 Categories = categories,
                 CurrentCategoryId = categoryId
             };
+
+            if (mobile)
+                return PartialView("~/Views/Category/CategoryMenu.Mobile.cshtml", model);
 
             return PartialView(model);
         }

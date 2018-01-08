@@ -15,12 +15,10 @@
         @Html.Action("CategoryMenu", "Category")
     </div>
 
-    <div class="col-md-7 col-sm-7">
+    <div class="col-md-7 col-sm-7 col-xs-12">
 
         <p>
-            <div class="col-md-6">
-                @Html.ActionLink("Добавить слово", "Add", "Word", null, new { @class = "btn btn-default" })
-            </div>
+            @Html.ActionLink("Добавить слово", "Add", "Word", null, new {@class = "btn btn-default"})
         </p>
 
         <table class="table well">
