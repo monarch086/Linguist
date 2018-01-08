@@ -23,7 +23,7 @@
             </div>
         </p>
 
-        <table class="table">
+        <table class="table well">
             <tr>
                 <th class="text-center">
                     @Html.DisplayName("Слово")
@@ -41,7 +41,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.OriginalWord)
+                        @Html.ActionLink(item.OriginalWord, "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Translation)
@@ -50,7 +50,6 @@
                         @Html.DisplayFor(modelItem => item.DateAdded)
                     </td>
                     <td>
-                        @Html.ActionLink("Изменить", "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
                         @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
                     </td>
                 </tr>
