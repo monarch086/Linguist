@@ -35,6 +35,9 @@ namespace Linguist.Web.Controllers
                 words = _wordsService.GetWordsByCategory(categoryId);
             }
 
+            if (Request.Browser.IsMobileDevice)
+                return View("~/Views/Home/MyWords.Mobile.cshtml", words);
+
             return View(words);
         }
 

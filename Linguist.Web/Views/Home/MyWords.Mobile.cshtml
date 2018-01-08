@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-md-7 col-sm-7">
-
+        
         <p>
             <div class="col-md-6">
                 @Html.ActionLink("Добавить слово", "Add", "Word", null, new { @class = "btn btn-default" })
@@ -26,13 +26,10 @@
         <table class="table">
             <tr>
                 <th class="text-center">
-                    @Html.DisplayName("Слово")
+                    <h3><b>@Html.DisplayName("Слово")</b></h3>
                 </th>
                 <th class="text-center">
-                    @Html.DisplayName("Перевод")
-                </th>
-                <th class="text-center hidden-xs">
-                    @Html.DisplayName("Дата")
+                    <h3><b>@Html.DisplayName("Перевод")</b></h3>
                 </th>
                 <th></th>
             </tr>
@@ -41,18 +38,15 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.OriginalWord)
+                        <h3>@Html.DisplayFor(modelItem => item.OriginalWord)</h3>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Translation)
-                    </td>
-                    <td class="hidden-xs">
-                        @Html.DisplayFor(modelItem => item.DateAdded)
+                        <h3>@Html.DisplayFor(modelItem => item.Translation)</h3>
                     </td>
                     <td>
-                        @Html.ActionLink("Изменить", "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
-                        @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
-                    </td>
+                        <h3>@Html.ActionLink("Изменить", "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h3>
+                        <h3>@Html.ActionLink("Удалить", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h3>
+</td>
                 </tr>
             }
 
