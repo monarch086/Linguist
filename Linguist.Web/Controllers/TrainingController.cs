@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Linguist.Services.Interfaces;
 
@@ -27,12 +28,20 @@ namespace Linguist.Web.Controllers
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
             var words = _userService.GetUserWords(login).ToList();
 
+            var rnd = new Random();
+            words = words.OrderBy(item => rnd.Next()).ToList();
+
             return View("~/Views/Training/Training.cshtml", words);
         }
 
         public ActionResult CategoryWords(int categoryId)
         {
-            return View();
+            var words = _wordsService.GetWordsByCategory(categoryId).ToList();
+
+            var rnd = new Random();
+            words = words.OrderBy(item => rnd.Next()).ToList();
+
+            return View("~/Views/Training/Training.cshtml", words);
         }
 
         public ActionResult LastWords(int quantityOfWords)

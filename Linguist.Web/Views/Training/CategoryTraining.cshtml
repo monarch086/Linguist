@@ -1,0 +1,14 @@
+﻿@model Linguist.Web.Models.CategoryViewModel
+    
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle large" type="button" data-toggle="dropdown">Слова из словаря
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+
+        @foreach (var category in Model.Categories)
+        {
+            <li><a href="@Url.Action("CategoryWords", "Training", new { categoryId = category.CategoryId })">@category.CategoryName</a></li>
+        }
+
+    </ul>
+</div>
