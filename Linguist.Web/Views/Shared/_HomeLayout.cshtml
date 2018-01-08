@@ -11,13 +11,22 @@
 
 <body>
 <div class="navbar navbar-inverse" role="navigation">
-    <a class="navbar-brand" href="#">
-        <span class="hidden-xs">Linguist</span>
-        <div class="visible-xs">Linguist</div>
-    </a>
-    @Html.ActionLink("Мои слова", "MyWords", "Home", null, new { @class = "navbar-brand" })
-    @Html.ActionLink("Тренировка", "Main", "Training", null, new { @class = "navbar-brand" })
-    @Html.ActionLink("Выход", "SignOut", "Account", null, new { @class = "navbar-brand" })
+    
+    @Html.ActionLink("Linguist", "MyWords", "Home", null, new {@class = "navbar-brand"})
+
+    <ul class="nav navbar-nav hidden-xs">
+        <li>
+            @Html.ActionLink("Мои слова", "MyWords", "Home", null, new { @class = "navbar-brand" })
+        </li>
+        <li>
+            @Html.ActionLink("Тренировка", "Main", "Training", null, new { @class = "navbar-brand" })
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="@Url.Action("SignOut", "Account")" style="margin-right: 10px;"><span class="glyphicon glyphicon-log-out"></span> Выход</a>
+        </li>
+    </ul>
 </div>
     
 <div class="row text-center">
