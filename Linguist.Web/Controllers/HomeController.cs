@@ -18,7 +18,7 @@ namespace Linguist.Web.Controllers
             _wordsService = wordsService;
         }
 
-        public ActionResult MyWords(int categoryId = 0)
+        public ActionResult MyWords(int categoryId = 0, string message = null)
         {
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
 
@@ -33,6 +33,11 @@ namespace Linguist.Web.Controllers
             else
             {
                 words = _wordsService.GetWordsByCategory(categoryId);
+            }
+
+            if (message != null)
+            {
+                ViewBag.Message = message;
             }
 
             if (Request.Browser.IsMobileDevice)

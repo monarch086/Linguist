@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Linguist.Services.Interfaces;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
@@ -42,6 +43,57 @@ namespace Linguist.Web.Controllers
             }
 
             return Redirect(Url.Action("MyWords", "Home"));
+        }
+
+        public ActionResult Edit(int categoryId)
+        {
+            var category = _categoriesService.GetCategories().FirstOrDefault(c => c.CategoryId == categoryId);
+
+            if (category != null)
+            {
+                return View(category);
+            }
+
+            return Redirect(Url.Action("MyWords", "Home", new { categoryId }));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Category category)
+        {
+            if (category == null)
+            {
+                var operationMessage = "Словарь не найден";
+                return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+            }
+
+            if (_categoriesService.EditCategory(category))
+            {
+                var operationMessage = $"Изменения словаря {category.CategoryName} сохранены";
+                return Redirect(Url.Action("MyWords", "Home", new { categoryId = category.CategoryId, message = operationMessage }));
+            }
+
+            var _operationMessage = $"Ошибка сохранения изменений словаря {category.CategoryName}";
+            return Redirect(Url.Action("MyWords", "Home", new { categoryId = category.CategoryId, message = _operationMessage }));
+        }
+
+        public ActionResult Delete(int categoryId)
+        {
+            var category = _categoriesService.GetCategories().FirstOrDefault(c => c.CategoryId == categoryId);
+
+            if (category == null)
+            {
+                var operationMessage = "Словарь не найден";
+                return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+            }
+
+            if (_categoriesService.RemoveCategory(category))
+            {
+                var operationMessage = $"Словарь {category.CategoryName} удалён";
+                return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+            }
+
+            var _operationMessage = $"Ошибка удаления словаря {category.CategoryName}";
+            return Redirect(Url.Action("MyWords", "Home", new { message = _operationMessage }));
         }
 
         public PartialViewResult CategoryMenu(int categoryId = 0, bool mobile = false, bool training = false)

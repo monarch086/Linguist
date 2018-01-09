@@ -188,6 +188,7 @@
     <Content Include="Views\Home\MyWords.Mobile.cshtml" />
     <Content Include="Views\Category\CategoryMenu.Mobile.cshtml" />
     <Content Include="Views\Training\CategoryTraining.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

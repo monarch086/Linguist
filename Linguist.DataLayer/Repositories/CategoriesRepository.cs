@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity.Migrations;
-using System.Linq;
-using Linguist.DataLayer.Context;
+﻿using Linguist.DataLayer.Context;
 using Linguist.DataLayer.Model;
 using Linguist.DataLayer.UnitOfWork;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace Linguist.DataLayer.Repositories
 {

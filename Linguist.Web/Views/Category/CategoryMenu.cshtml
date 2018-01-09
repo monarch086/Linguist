@@ -9,16 +9,30 @@
 
     @foreach (var category in Model.Categories)
     {
-        @Html.RouteLink(category.CategoryName, new
+        if (category.CategoryId == Model.CurrentCategoryId)
         {
-            controller = "Home",
-            action = "MyWords",
-            categoryId = category.CategoryId
-        }, new
+            @Html.RouteLink(category.CategoryName, new
+            {
+                controller = "Category",
+                action = "Edit",
+                categoryId = category.CategoryId
+            }, new
+            {
+                @class = "btn btn-block btn-default btn-lg btn-primary"
+            })
+        }
+        else
         {
-            @class = ("btn btn-block btn-default btn-lg")
-                     + (category.CategoryId == Model.CurrentCategoryId ? " btn-primary" : "")
-        })
+            @Html.RouteLink(category.CategoryName, new
+            {
+                controller = "Home",
+                action = "MyWords",
+                categoryId = category.CategoryId
+            }, new
+            {
+                @class = "btn btn-block btn-default btn-lg"
+            })
+        }
     }
     
     @Html.ActionLink("Добавить словарь", "Add", "Category", null,

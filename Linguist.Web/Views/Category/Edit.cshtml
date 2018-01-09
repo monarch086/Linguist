@@ -1,0 +1,39 @@
+﻿@model Linguist.DataLayer.Model.Category
+
+@{
+    ViewBag.Title = "Linguist: Редактирование словаря";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<h2>Редактирование словаря: @Model.CategoryName</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        @Html.HiddenFor(model => model.CategoryId)
+        @Html.HiddenFor(model => model.ParentCategoryId)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.DateAdded)
+        
+        <div class="form-group">
+            @Html.Label("Название словаря: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                @Html.ActionLink("Назад", "MyWords", "Home", new { categoryId = Model.CategoryId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Удалить", "Delete", "Category", new { categoryId = Model.CategoryId }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
