@@ -10,12 +10,18 @@ namespace Linguist.Services.Implementation
     {
         private readonly IRepository<Word> _wordsRepository;
 
+        private readonly IRepository<Category> _categoriesRepository;
+
         private readonly IRepository<CatWordRelation> _relationsRepository;
 
-        public WordsService(IRepository<Word> wordsRepository, IRepository<CatWordRelation> relationsRepository)
+        private readonly IUsersService _usersService;
+
+        public WordsService(IRepository<Word> wordsRepository, IRepository<Category> categoriesRepository, IRepository<CatWordRelation> relationsRepository, IUsersService usersService)
         {
             _wordsRepository = wordsRepository;
+            _categoriesRepository = categoriesRepository;
             _relationsRepository = relationsRepository;
+            _usersService = usersService;
         }
 
         public bool AddWord(Word word, int categoryId)
@@ -63,6 +69,22 @@ namespace Linguist.Services.Implementation
         {
             var word = _wordsRepository.GetAll().FirstOrDefault(w => w.WordId == wordId);
             return word;
+        }
+
+        public bool WordIsAlreadySaved(string login, string originalWord)
+        {
+            var userWords = _usersService.GetUserWords(login).Select(w => w.OriginalWord);
+            return userWords.Contains(originalWord);
+        }
+
+        public IEnumerable<Category> GetCategoriesOfWord(int wordId)
+        {
+            var categoriesIds = _relationsRepository.GetAll()
+                .Where(r => r.WordId == wordId)
+                .Select(r => r.CategoryId)
+                .ToList();
+
+            return _categoriesRepository.GetAll().Where(c => categoriesIds.Contains(c.CategoryId)).ToList();
         }
     }
 }

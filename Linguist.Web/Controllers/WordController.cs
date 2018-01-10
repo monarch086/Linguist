@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
 using System.Net;
+using System.Text;
 
 namespace Linguist.Web.Controllers
 {
@@ -38,6 +39,20 @@ namespace Linguist.Web.Controllers
 
             User user = _userService.GetUserByLogin(login);
 
+            if (_wordsService.WordIsAlreadySaved(login, originalWord))
+            {
+                var word = _userService.GetUserWords(login).FirstOrDefault(w => w.OriginalWord.Equals(originalWord));
+                var categoriesOfWord = _wordsService.GetCategoriesOfWord(word.WordId);
+                StringBuilder sb = new StringBuilder();
+                foreach (var category in categoriesOfWord)
+                {
+                    sb.Append(category.CategoryName + ", ");
+                }
+                sb.Remove(sb.Length - 2, 2);
+                var operationMessage = $"Слово {originalWord} не сохранено, так как такое слово уже есть в словарях: {sb}";
+                return Redirect(Url.Action("MyWords", "Home", new { categoryId, message = operationMessage }));
+            }
+
             Word _word = new Word
             {
                 UserId = user.UserId,
@@ -47,8 +62,16 @@ namespace Linguist.Web.Controllers
                 RememberIndex = 0
             };
 
-            _wordsService.AddWord(_word, categoryId);
-            return Redirect(Url.Action("MyWords", "Home"));
+            if (_wordsService.AddWord(_word, categoryId))
+            {
+                var operationMessage = $"Слово {originalWord} сохранено";
+                return Redirect(Url.Action("MyWords", "Home", new {categoryId, message = operationMessage}));
+            }
+            else
+            {
+                var operationMessage = $"Слово {originalWord} не удалось сохранить";
+                return Redirect(Url.Action("MyWords", "Home", new { categoryId, message = operationMessage }));
+            }
         }
 
         public ActionResult Remove(int wordId, string returnUrl)
