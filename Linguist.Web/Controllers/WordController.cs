@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
-using System.Net;
 using System.Text;
 
 namespace Linguist.Web.Controllers
@@ -41,7 +40,7 @@ namespace Linguist.Web.Controllers
 
             if (_wordsService.WordIsAlreadySaved(login, originalWord))
             {
-                var word = _userService.GetUserWords(login).FirstOrDefault(w => w.OriginalWord.Equals(originalWord));
+                var word = _userService.GetUserWords(login).FirstOrDefault(w => w.OriginalWord.ToLower().Equals(originalWord.ToLower()));
                 var categoriesOfWord = _wordsService.GetCategoriesOfWord(word.WordId);
                 StringBuilder sb = new StringBuilder();
                 foreach (var category in categoriesOfWord)
@@ -76,10 +75,24 @@ namespace Linguist.Web.Controllers
 
         public ActionResult Remove(int wordId, string returnUrl)
         {
-            if (_wordsService.RemoveWord(wordId))
-                return Redirect(returnUrl);
+            Word word = _wordsService.GetWordById(wordId);
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: word can not be deleted");
+            if (_wordsService.RemoveWord(wordId))
+            {
+                var operationMessage = $"Слово {word.OriginalWord} удалено";
+                return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+            }
+
+            if (word != null)
+            {
+                var operationMessage = $"Слово {word.OriginalWord} не удалось удалить";
+                return Redirect(Url.Action("MyWords", "Home", new {message = operationMessage}));
+            }
+            else
+            {
+                var operationMessage = "Указанное слово не найдено";
+                return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+            }
         }
 
         public ActionResult Edit(int wordId, string returnUrl)
@@ -88,12 +101,32 @@ namespace Linguist.Web.Controllers
 
             if (word != null)
             {
-                var categoriesIds = _categoriesService.GetCategoriesIdsByWordId(wordId);
-                ViewBag.CategoriesListItems = GetUserCategoriesAsSelectList(categoriesIds.FirstOrDefault());
-                return View("~/Views/Word/Add.cshtml", word);
+                return View(word);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: word can not be edited");
+            var operationMessage = "Указанное слово не найдено";
+            return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Word word)
+        {
+            if (word == null)
+            {
+                var operationMessage = "Ошибка редактирования слова";
+                return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+            }
+
+            if (_wordsService.EditWord(word))
+            {
+                var operationMessage = $"Слово {word.OriginalWord} сохранено";
+                return Redirect(Url.Action("MyWords", "Home", new {message = operationMessage}));
+            }
+            else
+            {
+                var operationMessage = $"Ошибка сохранения слова {word.OriginalWord}";
+                return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+            }
         }
 
         private IEnumerable<SelectListItem> GetUserCategoriesAsSelectList(int selectedCategoryId = 0)

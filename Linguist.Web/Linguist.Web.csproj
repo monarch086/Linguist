@@ -189,6 +189,7 @@
     <Content Include="Views\Category\CategoryMenu.Mobile.cshtml" />
     <Content Include="Views\Training\CategoryTraining.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Word\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

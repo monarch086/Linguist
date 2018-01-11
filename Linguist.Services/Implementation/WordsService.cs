@@ -73,7 +73,8 @@ namespace Linguist.Services.Implementation
 
         public bool WordIsAlreadySaved(string login, string originalWord)
         {
-            var userWords = _usersService.GetUserWords(login).Select(w => w.OriginalWord);
+            originalWord = originalWord.ToLower();
+            var userWords = _usersService.GetUserWords(login).Select(w => w.OriginalWord.ToLower());
             return userWords.Contains(originalWord);
         }
 
