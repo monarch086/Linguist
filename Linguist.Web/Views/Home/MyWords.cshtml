@@ -44,7 +44,6 @@
                 <th class="text-center hidden-xs">
                     @Html.DisplayName("Дата")
                 </th>
-                <th></th>
             </tr>
 
             @foreach (var item in Model)
@@ -60,7 +59,6 @@
                         @Html.DisplayFor(modelItem => item.DateAdded)
                     </td>
                     <td>
-                        @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
                     </td>
                 </tr>
             }

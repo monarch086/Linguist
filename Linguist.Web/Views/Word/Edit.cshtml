@@ -49,6 +49,7 @@
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Сохранить" class="btn btn-primary" />
                     @Html.ActionLink("Назад", "MyWords", "Home", null, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = Model.WordId }, new { @class = "btn btn-danger" })
                 </div>
             </div>
         </div>

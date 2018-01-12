@@ -41,7 +41,6 @@
                 <th class="text-center">
                     <h4><b>@Html.DisplayName("Перевод")</b></h4>
                 </th>
-                <th></th>
             </tr>
 
             @foreach (var item in Model)
@@ -54,7 +53,6 @@
                         <h4>@Html.DisplayFor(modelItem => item.Translation)</h4>
                     </td>
                     <td>
-                        <h4>@Html.ActionLink("Удал.", "Remove", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h4>
                     </td>
                 </tr>
             }
