@@ -59,5 +59,14 @@ namespace Linguist.Services.Implementation
 
             return categoriesIds;
         }
+
+        public IEnumerable<Category> GetCategoriesByWordId(int wordId)
+        {
+            var categoriesIds = GetCategoriesIdsByWordId(wordId);
+
+            var categories = _categoriesRepository.GetAll().Where(c => categoriesIds.Contains(c.CategoryId)).ToList();
+
+            return categories;
+        }
     }
 }

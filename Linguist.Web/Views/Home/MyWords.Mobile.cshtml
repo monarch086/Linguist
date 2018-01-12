@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Linguist.DataLayer.Model.Word>
+﻿@model IEnumerable<Linguist.Web.Models.WordViewModel>
 
 <link href="~/Content/MyWordsMobileStyles.css" rel="stylesheet" />
 
@@ -41,18 +41,27 @@
                 <th class="text-center">
                     <h4><b>@Html.DisplayName("Перевод")</b></h4>
                 </th>
+                <th class="text-center">
+                    <h4><b>@Html.DisplayName("Словари")</b></h4>
+                </th>
             </tr>
 
             @foreach (var item in Model)
             {
+                var word = item.Word;
+
                 <tr>
                     <td>
-                        <h4>@Html.ActionLink(item.OriginalWord, "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h4>
+                        <h4>@Html.ActionLink(word.OriginalWord, "Edit", "Word", new { wordId = word.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h4>
                     </td>
                     <td>
-                        <h4>@Html.DisplayFor(modelItem => item.Translation)</h4>
+                        <h4>@Html.DisplayFor(modelItem => word.Translation)</h4>
                     </td>
                     <td>
+                        @foreach (var category in item.WordCategories)
+                        {
+                            <h4><span class="label label-info">@category.CategoryName</span></h4>
+                        }
                     </td>
                 </tr>
             }

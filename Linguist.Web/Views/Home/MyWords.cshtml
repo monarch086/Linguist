@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Linguist.DataLayer.Model.Word>
+﻿@model IEnumerable<Linguist.Web.Models.WordViewModel>
 
 @{
     ViewBag.Title = "Linguist: Мои слова";
@@ -41,24 +41,27 @@
                 <th class="text-center">
                     @Html.DisplayName("Перевод")
                 </th>
-                <th class="text-center hidden-xs">
-                    @Html.DisplayName("Дата")
+                <th class="text-center">
+                    @Html.DisplayName("Словари")
                 </th>
             </tr>
 
             @foreach (var item in Model)
             {
+                var word = item.Word;
+
                 <tr>
                     <td>
-                        @Html.ActionLink(item.OriginalWord, "Edit", "Word", new { wordId = item.WordId, returnUrl = Request.Url.PathAndQuery }, null)
+                        @Html.ActionLink(word.OriginalWord, "Edit", "Word", new { wordId = word.WordId, returnUrl = Request.Url.PathAndQuery }, null)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Translation)
-                    </td>
-                    <td class="hidden-xs">
-                        @Html.DisplayFor(modelItem => item.DateAdded)
+                        @Html.DisplayFor(modelItem => word.Translation)
                     </td>
                     <td>
+                        @foreach (var category in item.WordCategories)
+                        {
+                            <h5><span class="label label-info">@category.CategoryName</span></h5>
+                        }
                     </td>
                 </tr>
             }

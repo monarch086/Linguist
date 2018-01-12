@@ -22,7 +22,14 @@
 
         @foreach (var category in Model.Categories)
         {
-            <li><a href="@Url.Action("MyWords", "Home", new { categoryId = category.CategoryId })">@category.CategoryName</a></li>
+            if (category.CategoryId == Model.CurrentCategoryId)
+            {
+                <li><a href="@Url.Action("Edit", "Category", new { categoryId = category.CategoryId })">@category.CategoryName</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("MyWords", "Home", new { categoryId = category.CategoryId })">@category.CategoryName</a></li>
+            }
         }
         
         <li><a href="@Url.Action("Add", "Category")">Добавить словарь</a></li>
