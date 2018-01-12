@@ -28,13 +28,12 @@ namespace Linguist.Services.Implementation
         {
             if(_wordsRepository.Add(word) == 0)
                 return false;
-            //int? wordId = _wordsRepository.GetAll().FirstOrDefault(w => w.OriginalWord.Equals(word.OriginalWord))?.WordId;
-            if (_relationsRepository.Add(new CatWordRelation
+
+            if (categoryId != 0)
             {
-                WordId = word.WordId,
-                CategoryId = categoryId
-            }) == 0)
-                return false;
+                _relationsRepository.Add(new CatWordRelation {WordId = word.WordId, CategoryId = categoryId});
+            }
+
             return true;
         }
 

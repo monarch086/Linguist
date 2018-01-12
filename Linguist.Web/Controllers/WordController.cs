@@ -34,6 +34,12 @@ namespace Linguist.Web.Controllers
         [HttpPost]
         public ActionResult Add(int categoryId, string originalWord, string translation)
         {
+            if (string.IsNullOrEmpty(originalWord))
+            {
+                var operationMessage = $"Пустое слово не может быть сохранено";
+                return Redirect(Url.Action("MyWords", "Home", new { categoryId, message = operationMessage }));
+            }
+            
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
 
             User user = _userService.GetUserByLogin(login);
