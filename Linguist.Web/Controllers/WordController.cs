@@ -24,9 +24,9 @@ namespace Linguist.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add()
+        public ActionResult Add(int categoryId = 0)
         {
-            ViewBag.CategoriesListItems = GetUserCategoriesAsSelectList();
+            ViewBag.CategoriesListItems = GetUserCategoriesAsSelectList(categoryId);
 
             return View();
         }

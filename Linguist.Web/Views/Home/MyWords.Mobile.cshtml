@@ -31,7 +31,7 @@
             @Html.Action("CategoryMenu", "Category", new { mobile = true })
         </p>
         <p>
-            @Html.ActionLink("Добавить слово", "Add", "Word", null, new { @class = "btn btn-default large" })
+            @Html.ActionLink("Добавить слово", "Add", "Word", new { categoryId = Model.CurrentCategoryId }, new { @class = "btn btn-default large" })
         </p>
 
         <table class="table well">
@@ -71,6 +71,6 @@
     </div>
 </div>
 
-<div class="btn-group">
+<div class="btn-group" style="margin-bottom: 20px">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("MyWords", new { page = x, category = Model.CurrentCategoryId }))
 </div>
