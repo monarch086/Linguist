@@ -1,4 +1,4 @@
-﻿@model Linguist.DataLayer.Model.Word
+﻿@model Linguist.Web.Models.WordViewModel
 
 @{
     ViewBag.Title = "Linguist: редактирование слова";
@@ -16,23 +16,23 @@
         <div class="form-horizontal">
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.WordId)
-            @Html.HiddenFor(model => model.UserId)
-            @Html.HiddenFor(model => model.DateAdded)
+            @Html.HiddenFor(model => model.Word.WordId)
+            @Html.HiddenFor(model => model.Word.UserId)
+            @Html.HiddenFor(model => model.Word.DateAdded)
 
             <div class="form-group">
                 @Html.Label("Слово или фраза:", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.OriginalWord, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.OriginalWord, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Word.OriginalWord, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Word.OriginalWord, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.Label("Перевод:", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Translation, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Translation, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Word.Translation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Word.Translation, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -40,8 +40,26 @@
             <div class="form-group">
                 @Html.Label("Индекс запоминания: ", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.RememberIndex, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.RememberIndex, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Word.RememberIndex, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Word.RememberIndex, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.Label("Словари: ", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @foreach (var category in Model.WordCategories)
+                    {
+                        <h3>
+                            <span class="label label-info">@category.CategoryName</span>
+                            <div style="display:inline" onClick="removeAction(@category.CategoryName)"><img src="~/Resources/Remove-icon16px.png" /></div>
+                            @*<img src="~/Resources/Remove-icon16px.png" class="removeCategory" onclick="removeAction(category.CategoryName)"  id=@category.CategoryName />*@
+                        </h3>
+                    }
+                    <p>
+                        @Html.DropDownList("CategoryId", ViewBag.CategoriesListItems as IEnumerable<SelectListItem>, "Выберите словарь", new { htmlAttributes = new { @class = "form-control" } })
+                        <button class="btn btn-default" id="addCategory">+</button>
+                    </p>
                 </div>
             </div>
 
@@ -49,9 +67,12 @@
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Сохранить" class="btn btn-primary" />
                     @Html.ActionLink("Назад", "MyWords", "Home", null, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = Model.WordId }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = Model.Word.WordId }, new { @class = "btn btn-danger" })
                 </div>
             </div>
         </div>
     }
 </div>
+
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/editWordController.js"></script>

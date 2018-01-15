@@ -140,15 +140,19 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\lingvist - Web Deploy.pubxml" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Resources\bg.jpg" />
     <Content Include="Resources\navigate-left.png" />
     <Content Include="Resources\navigate-right.png" />
     <Content Include="Resources\paper.png" />
+    <Content Include="Resources\Remove-icon16px.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\editWordController.js" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\trainingController.js" />
@@ -178,7 +182,6 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Account\Start.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -194,6 +197,8 @@
     <Content Include="Views\Training\CategoryTraining.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Word\Edit.cshtml" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

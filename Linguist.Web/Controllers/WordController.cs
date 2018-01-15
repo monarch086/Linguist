@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
 using System.Text;
+using Linguist.Web.Models;
 
 namespace Linguist.Web.Controllers
 {
@@ -104,10 +105,19 @@ namespace Linguist.Web.Controllers
         public ActionResult Edit(int wordId, string returnUrl)
         {
             Word word = _wordsService.GetWordById(wordId);
+            ViewBag.CategoriesListItems = GetUserCategoriesAsSelectList();
 
             if (word != null)
             {
-                return View(word);
+                var wordCategories = _categoriesService.GetCategoriesByWordId(word.WordId);
+
+                var model = new WordViewModel
+                {
+                    Word = word,
+                    WordCategories = wordCategories
+                };
+
+                return View(model);
             }
 
             var operationMessage = "Указанное слово не найдено";
