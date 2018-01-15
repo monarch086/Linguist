@@ -33,7 +33,7 @@ namespace Linguist.DataLayer.Repositories
 
         public IEnumerable<CatWordRelation> GetAll()
         {
-            return _context.CatWordRelations;
+            return _context.CatWordRelations.ToList();
         }
 
         public int Remove(int entityId)

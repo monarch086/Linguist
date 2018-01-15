@@ -33,7 +33,7 @@ namespace Linguist.DataLayer.Repositories
 
         public IEnumerable<Word> GetAll()
         {
-            return _context.Words;
+            return _context.Words.ToList();
         }
 
         public int Remove(int entityId)
