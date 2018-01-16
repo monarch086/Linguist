@@ -48,24 +48,28 @@
             <div class="form-group">
                 @Html.Label("Словари: ", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @foreach (var category in Model.WordCategories)
-                    {
-                        <h3>
-                            <span class="label label-info">@category.CategoryName</span>
-                            <div style="display:inline" onClick="removeAction(@category.CategoryName)"><img src="~/Resources/Remove-icon16px.png" /></div>
-                            @*<img src="~/Resources/Remove-icon16px.png" class="removeCategory" onclick="removeAction(category.CategoryName)"  id=@category.CategoryName />*@
-                        </h3>
-                    }
+                    <div id="current-categories">
+                        @foreach (var category in Model.WordCategories)
+                        {
+                            <h3>
+                                <span class="label label-info" id="@category.CategoryId">@category.CategoryName</span>
+                                <div style="display: inline" id="@category.CategoryId" onClick="removeAction(this.id)">
+                                    <img src="~/Resources/Remove-icon16px.png"/>
+                                </div>
+                            </h3>
+                        }
+                    </div>
+                    <br/>
                     <p>
                         @Html.DropDownList("CategoryId", ViewBag.CategoriesListItems as IEnumerable<SelectListItem>, "Выберите словарь", new { htmlAttributes = new { @class = "form-control" } })
-                        <button class="btn btn-default" id="addCategory">+</button>
+                        <img src="~/Resources/Add-icon.png" width="24" id="addCategory"/>
                     </p>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                    <input type="submit" value="Сохранить" class="btn btn-primary" onclick="saveAction(@Model.Word.WordId)"/>
                     @Html.ActionLink("Назад", "MyWords", "Home", null, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = Model.Word.WordId }, new { @class = "btn btn-danger" })
                 </div>

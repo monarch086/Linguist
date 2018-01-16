@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
@@ -154,6 +155,16 @@ namespace Linguist.Web.Controllers
                 Value = i.CategoryId.ToString(),
                 Selected = i.CategoryId == selectedCategoryId
             }).ToList();
+        }
+
+        [HttpPost]
+        public bool UpdateWordCategories(int wordId, IEnumerable<int> categoryIds)
+        {
+
+
+            Debug.WriteLine(wordId);
+
+            return true;
         }
     }
 }
