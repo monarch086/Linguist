@@ -84,7 +84,7 @@ namespace Linguist.Web.Controllers
         {
             // Create the authentication cookie
             HttpCookie authCookie = FormsAuthentication.GetAuthCookie(login, true);
-            authCookie.Expires = DateTime.Now.AddDays(10);
+            authCookie.Expires = DateTime.Now.AddDays(3);
             // Add the cookie to the response
             Response.Cookies.Add(authCookie);
         }
