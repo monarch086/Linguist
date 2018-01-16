@@ -139,7 +139,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Properties\PublishProfiles\lingvist - Web Deploy.pubxml" />
+    <Content Include="Resources\Add-icon.png" />
     <Content Include="Resources\bg.jpg" />
     <Content Include="Resources\navigate-left.png" />
     <Content Include="Resources\navigate-right.png" />
@@ -148,6 +148,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\editWordController.js" />
+    <None Include="Properties\PublishProfiles\lingvist - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\lingvist1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
