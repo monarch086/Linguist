@@ -49,7 +49,7 @@ namespace Linguist.Web.Controllers
             if (_wordsService.WordIsAlreadySaved(login, originalWord))
             {
                 var word = _userService.GetUserWords(login).FirstOrDefault(w => w.OriginalWord.ToLower().Equals(originalWord.ToLower()));
-                var categoriesOfWord = _wordsService.GetCategoriesOfWord(word.WordId);
+                var categoriesOfWord = _categoriesService.GetCategoriesByWordId(word.WordId);
                 StringBuilder sb = new StringBuilder();
                 foreach (var category in categoriesOfWord)
                 {

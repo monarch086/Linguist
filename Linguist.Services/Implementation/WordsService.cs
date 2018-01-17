@@ -76,14 +76,5 @@ namespace Linguist.Services.Implementation
             var userWords = _usersService.GetUserWords(login).Select(w => w.OriginalWord.ToLower());
             return userWords.Contains(originalWord);
         }
-
-        public IEnumerable<Category> GetCategoriesOfWord(int wordId)
-        {
-            var categoriesIds = _relationsRepository.GetAll()
-                .Where(r => r.WordId == wordId)
-                .Select(r => r.CategoryId);
-
-            return _categoriesRepository.GetAll().Where(c => categoriesIds.Contains(c.CategoryId));
-        }
     }
 }

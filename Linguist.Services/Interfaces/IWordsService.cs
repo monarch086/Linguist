@@ -16,7 +16,5 @@ namespace Linguist.Services.Interfaces
         Word GetWordById(int wordId);
 
         bool WordIsAlreadySaved(string login, string originalWord);
-
-        IEnumerable<Category> GetCategoriesOfWord(int wordId);
     }
 }
