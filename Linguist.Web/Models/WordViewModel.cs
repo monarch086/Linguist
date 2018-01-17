@@ -8,5 +8,7 @@ namespace Linguist.Web.Models
         public Word Word { get; set; }
 
         public IEnumerable<Category> WordCategories { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

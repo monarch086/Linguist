@@ -70,7 +70,7 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Сохранить" class="btn btn-primary" onclick="saveAction(@Model.Word.WordId)"/>
-                    @Html.ActionLink("Назад", "MyWords", "Home", null, new { @class = "btn btn-primary" })
+                    <a class="btn btn-primary" href="@Model.ReturnUrl">Назад</a>
                     @Html.ActionLink("Удалить", "Remove", "Word", new { wordId = Model.Word.WordId }, new { @class = "btn btn-danger" })
                 </div>
             </div>
