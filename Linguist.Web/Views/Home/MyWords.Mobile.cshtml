@@ -72,5 +72,5 @@
 </div>
 
 <div class="btn-group" style="margin-bottom: 20px">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("MyWords", new { page = x, category = Model.CurrentCategoryId }))
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("MyWords", new { page = x, categoryId = Model.CurrentCategoryId }))
 </div>
