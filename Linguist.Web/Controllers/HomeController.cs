@@ -54,8 +54,50 @@ namespace Linguist.Web.Controllers
                 totalWordsCount = _wordsService.GetWordsByCategory(categoryId).Count();
             }
 
+            var model = GetMyWordsModelFromWords(words, page, totalWordsCount, categoryId, message);
+
+            if (Request.Browser.IsMobileDevice)
+                return View("~/Views/Home/MyWords.Mobile.cshtml", model);
+
+            return View(model);
+        }
+
+        public ActionResult SearchWords(string word, int page = 1)
+        {
+            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+
+            var words = _userService.GetUserWords(login)
+                .Where(w => w.OriginalWord.ToLower().Contains(word) || w.Translation.ToLower().Contains(word))
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize).ToList();
+
+            var model = GetMyWordsModelFromWords(words, 0, 0, 0, null);
+
+            return View(model);
+        }
+
+        public ActionResult SearchPager(string word, int page = 1)
+        {
+            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+
+            var totalWordsCount = _userService
+                .GetUserWords(login)
+                .Count(w => w.OriginalWord.ToLower().Contains(word) || w.Translation.ToLower().Contains(word));
+
+            var pageModel = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = pageSize,
+                TotalItems = totalWordsCount
+            };
+
+            return View(pageModel);
+        }
+
+        private MyWordsModel GetMyWordsModelFromWords(IEnumerable<Word> words, int page, int totalWordsCount, int categoryId, string message)
+        {
             var wordsWithCategories = words.Select(w =>
-                    new WordViewModel {Word = w, WordCategories = _categoriesService.GetCategoriesByWordId(w.WordId)})
+                    new WordViewModel { Word = w, WordCategories = _categoriesService.GetCategoriesByWordId(w.WordId) })
                 .ToList();
 
             var model = new MyWordsModel
@@ -71,10 +113,7 @@ namespace Linguist.Web.Controllers
                 Message = message
             };
 
-            if (Request.Browser.IsMobileDevice)
-                return View("~/Views/Home/MyWords.Mobile.cshtml", model);
-
-            return View(model);
+            return model;
         }
     }
 }
