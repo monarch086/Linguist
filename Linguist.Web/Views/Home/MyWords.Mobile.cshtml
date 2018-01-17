@@ -1,5 +1,5 @@
 ﻿@using Linguist.Web.HtmlHelpers
-@model Linguist.Web.Models.WordListViewModel
+@model Linguist.Web.Models.MyWordsModel
 
 <link href="~/Content/MyWordsMobileStyles.css" rel="stylesheet" />
 
@@ -8,13 +8,13 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-@if (!string.IsNullOrEmpty(ViewBag.Message))
+@if (!string.IsNullOrEmpty(Model.Message))
 {
     <div class="row">
         <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
             <div class="alert alert-info alert-dismissable">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>@ViewBag.Message</strong>
+                <strong>@Model.Message</strong>
             </div>
         </div>
     </div>

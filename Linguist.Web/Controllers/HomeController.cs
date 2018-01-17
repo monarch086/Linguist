@@ -58,7 +58,7 @@ namespace Linguist.Web.Controllers
                     new WordViewModel {Word = w, WordCategories = _categoriesService.GetCategoriesByWordId(w.WordId)})
                 .ToList();
 
-            var model = new WordListViewModel
+            var model = new MyWordsModel
             {
                 WordsWithCategories = wordsWithCategories,
                 PagingInfo = new PagingInfo
@@ -67,13 +67,9 @@ namespace Linguist.Web.Controllers
                     ItemsPerPage = pageSize,
                     TotalItems = totalWordsCount
                 },
-                CurrentCategoryId = categoryId
+                CurrentCategoryId = categoryId,
+                Message = message
             };
-
-            if (message != null)
-            {
-                ViewBag.Message = message;
-            }
 
             if (Request.Browser.IsMobileDevice)
                 return View("~/Views/Home/MyWords.Mobile.cshtml", model);

@@ -72,7 +72,7 @@ namespace Linguist.Web.Controllers
             if (_wordsService.AddWord(_word, categoryId))
             {
                 var operationMessage = $"Слово {originalWord} сохранено";
-                return Redirect(Url.Action("MyWords", "Home", new {categoryId, message = operationMessage}));
+                return Redirect(Url.Action("MyWords", "Home", new {page = 1, categoryId, message = operationMessage}));
             }
             else
             {
@@ -115,7 +115,8 @@ namespace Linguist.Web.Controllers
                 var model = new WordViewModel
                 {
                     Word = word,
-                    WordCategories = wordCategories
+                    WordCategories = wordCategories,
+                    ReturnUrl = returnUrl
                 };
 
                 return View(model);
