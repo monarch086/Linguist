@@ -7,6 +7,10 @@ function start() {
     addBtn = document.getElementById("addCategory");
     addBtn.onclick = addAction;
 
+    $("form").submit(function(e) {
+        e.preventDefault();
+    });
+
     setCurrentCategories();
 }
 
@@ -71,13 +75,20 @@ function removeCategoryFromArray(id) {
 }
 
 function saveAction(wordId) {
-    $.post("/Word/UpdateWordCategories",
+    var categoryIds = addedCategories.map(function (category) {
+        return category.id;
+    });
+
+    console.log(categoryIds);
+
+    jQuery.ajaxSettings.traditional = true;
+
+    $.get("/Word/UpdateWordCategories",
         {
             wordId: wordId,
-            categoryIds: addedCategories
+            categoryIds: categoryIds
         },
         function (data, status) {
-            console.log("wordId = " + wordId);
+            $("form").unbind('submit').submit();
         });
-    
 }

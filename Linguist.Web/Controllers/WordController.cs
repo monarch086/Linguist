@@ -34,7 +34,7 @@ namespace Linguist.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(int categoryId, string originalWord, string translation)
+        public ActionResult Add(string originalWord, string translation, int categoryId = 0)
         {
             if (string.IsNullOrEmpty(originalWord))
             {
@@ -141,8 +141,8 @@ namespace Linguist.Web.Controllers
             }
             else
             {
-                var operationMessage = $"Ошибка сохранения слова {word.OriginalWord}";
-                return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
+                //var operationMessage = $"Ошибка сохранения слова {word.OriginalWord}";
+                return Redirect(Url.Action("MyWords", "Home", null));
             }
         }
 
@@ -157,14 +157,9 @@ namespace Linguist.Web.Controllers
             }).ToList();
         }
 
-        [HttpPost]
-        public bool UpdateWordCategories(int wordId, IEnumerable<int> categoryIds)
+        public void UpdateWordCategories(int wordId, int[] categoryIds)
         {
-
-
-            Debug.WriteLine(wordId);
-
-            return true;
+            _categoriesService.UpdateWordCategories(wordId, categoryIds);
         }
     }
 }

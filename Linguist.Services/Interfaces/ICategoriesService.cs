@@ -16,5 +16,7 @@ namespace Linguist.Services.Interfaces
         IEnumerable<int> GetCategoriesIdsByWordId(int wordId);
 
         IEnumerable<Category> GetCategoriesByWordId(int wordId);
+
+        void UpdateWordCategories(int wordId, int[] categoryIds);
     }
 }

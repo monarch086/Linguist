@@ -68,5 +68,39 @@ namespace Linguist.Services.Implementation
 
             return categories;
         }
+
+        public void UpdateWordCategories(int wordId, int[] categoryIds)
+        {
+            if (categoryIds == null)
+            {
+                var relationIds = _relationsRepository.GetAll()
+                    .Where(r => r.WordId == wordId)
+                    .Select(r => r.CatWordRelationId);
+                foreach (var relationId in relationIds)
+                {
+                    _relationsRepository.Remove(relationId);
+                }
+
+                return;
+            }
+
+            var currentCategories = GetCategoriesIdsByWordId(wordId);
+
+            var addedCategories = categoryIds.Where(cid => !currentCategories.Contains(cid));
+            var deletedCategories = currentCategories.Where(cid => !categoryIds.Contains(cid));
+
+            foreach (var categoryId in addedCategories)
+            {
+                _relationsRepository.Add(new CatWordRelation { WordId = wordId, CategoryId = categoryId });
+            }
+
+            var relationIdsToRemove = _relationsRepository.GetAll()
+                .Where(r => r.WordId == wordId && deletedCategories.Contains(r.CategoryId))
+                .Select(r => r.CatWordRelationId);
+            foreach (var relationId in relationIdsToRemove)
+            {
+                _relationsRepository.Remove(relationId);
+            }
+        }
     }
 }
