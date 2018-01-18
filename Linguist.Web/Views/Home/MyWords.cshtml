@@ -35,41 +35,9 @@
         </p>
         
         <input class="form-control" id="searchInput" type="text" placeholder="Поиск..." style="margin-bottom:10px">
-
-        <table class="table well" id="wordsTable">
-            <tr>
-                <th class="text-center">
-                    @Html.DisplayName("Слово")
-                </th>
-                <th class="text-center">
-                    @Html.DisplayName("Перевод")
-                </th>
-                <th class="text-center">
-                    @Html.DisplayName("Словари")
-                </th>
-            </tr>
-
-            @foreach (var item in Model.WordsWithCategories)
-            {
-                var word = item.Word;
-
-                <tr>
-                    <td>
-                        @Html.ActionLink(word.OriginalWord, "Edit", "Word", new { wordId = word.WordId, returnUrl = Request.Url.PathAndQuery }, null)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => word.Translation)
-                    </td>
-                    <td>
-                        @foreach (var category in item.WordCategories)
-                        {
-                            <h5><span class="label label-info">@category.CategoryName</span></h5>
-                        }
-                    </td>
-                </tr>
-            }
-
-        </table>
+            
+        @Html.Partial("SearchWords", Model)
+            
     </div>
 </div>
 
