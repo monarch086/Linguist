@@ -20,7 +20,14 @@ namespace Linguist.Web.HtmlHelpers
             for (int i = 1; i <= pagingInfo.TotalPages; i++)
             {
                 TagBuilder tag = new TagBuilder("a");
-                tag.MergeAttribute("href", pageUrl(i));
+
+                if (pageUrl != null)
+                    tag.MergeAttribute("href", pageUrl(i));
+                else
+                {
+                    tag.MergeAttribute("href", "#");
+                }
+
                 tag.InnerHtml = i.ToString();
                 if (i == pagingInfo.CurrentPage)
                 {

@@ -157,6 +157,7 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\myWordsController.js" />
     <Content Include="Scripts\trainingController.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -201,6 +202,8 @@
     <Content Include="Views\Word\Edit.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\Home\SearchWords.cshtml" />
+    <Content Include="Views\Home\SearchPager.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

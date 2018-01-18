@@ -33,8 +33,10 @@
         <p>
             @Html.ActionLink("Добавить слово", "Add", "Word", new { categoryId = Model.CurrentCategoryId }, new {@class = "btn btn-default"})
         </p>
+        
+        <input class="form-control" id="searchInput" type="text" placeholder="Поиск..." style="margin-bottom:10px">
 
-        <table class="table well">
+        <table class="table well" id="wordsTable">
             <tr>
                 <th class="text-center">
                     @Html.DisplayName("Слово")
@@ -71,6 +73,8 @@
     </div>
 </div>
 
-<div class="btn-group" style="margin-bottom: 20px">
+<div class="btn-group" style="margin-bottom: 20px" id="pager">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("MyWords", new { page = x, categoryId = Model.CurrentCategoryId }))
 </div>
+
+<script src="~/Scripts/myWordsController.js"></script>
