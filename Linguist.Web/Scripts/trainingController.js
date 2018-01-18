@@ -54,7 +54,7 @@ function moveRight() {
 function showTranslation()
 {
     if (!isTranslation) {
-        word.innerHTML = '<h3><b>' + words[currentPosition].Translation + '</b></h3>';
+        word.innerHTML = words[currentPosition].Translation;
         translationBtn.innerHTML = 'Спрятать перевод';
         isTranslation = true;
     } else {
@@ -65,7 +65,7 @@ function showTranslation()
 }
 
 function loadWord() {
-    word.innerHTML = '<h3><b>' + words[currentPosition].OriginalWord + '</b></h3>';
+    word.innerHTML = words[currentPosition].OriginalWord;
 }
 
 function updateCounter() {
