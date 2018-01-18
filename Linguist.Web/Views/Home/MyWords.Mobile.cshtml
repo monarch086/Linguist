@@ -33,44 +33,16 @@
         <p>
             @Html.ActionLink("Добавить слово", "Add", "Word", new { categoryId = Model.CurrentCategoryId }, new { @class = "btn btn-default large" })
         </p>
+        
+        <input class="form-control" id="searchInput" type="text" placeholder="Поиск..." style="margin-bottom:10px">
+            
+        @Html.Partial("SearchWords.Mobile", Model)
 
-        <table class="table well">
-            <tr>
-                <th class="text-center">
-                    <h4><b>@Html.DisplayName("Слово")</b></h4>
-                </th>
-                <th class="text-center">
-                    <h4><b>@Html.DisplayName("Перевод")</b></h4>
-                </th>
-                <th class="text-center">
-                    <h4><b>@Html.DisplayName("Словари")</b></h4>
-                </th>
-            </tr>
-
-            @foreach (var item in Model.WordsWithCategories)
-            {
-                var word = item.Word;
-
-                <tr>
-                    <td>
-                        <h4>@Html.ActionLink(word.OriginalWord, "Edit", "Word", new { wordId = word.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h4>
-                    </td>
-                    <td>
-                        <h4>@Html.DisplayFor(modelItem => word.Translation)</h4>
-                    </td>
-                    <td>
-                        @foreach (var category in item.WordCategories)
-                        {
-                            <h4><span class="label label-info">@category.CategoryName</span></h4>
-                        }
-                    </td>
-                </tr>
-            }
-
-        </table>
     </div>
 </div>
 
-<div class="btn-group" style="margin-bottom: 20px">
+<div class="btn-group" style="margin-bottom: 20px" id="pager">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("MyWords", new { page = x, categoryId = Model.CurrentCategoryId }))
 </div>
+
+<script src="~/Scripts/myWordsController.js"></script>

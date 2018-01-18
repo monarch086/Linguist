@@ -73,6 +73,9 @@ namespace Linguist.Web.Controllers
 
             var model = GetMyWordsModelFromWords(words, 0, 0, 0, null);
 
+            if (Request.Browser.IsMobileDevice)
+                return View("~/Views/Home/SearchWords.Mobile.cshtml", model);
+
             return View(model);
         }
 
