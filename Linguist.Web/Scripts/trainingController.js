@@ -22,14 +22,15 @@ function clickHandler(event) {
     
     var pressedElement = event.srcElement;
 
-    if (pressedElement === document.getElementById("left"))
+    if (pressedElement === document.getElementById("left-block"))
         moveLeft();
 
-    else if (pressedElement === document.getElementById("right"))
+    else if (pressedElement === document.getElementById("right-block"))
         moveRight();
 
     else if (pressedElement === document.getElementById("translationBtn") ||
-        pressedElement === document.getElementById("card"))
+        pressedElement === document.getElementById("card") || 
+        pressedElement === document.getElementById("word"))
         showTranslation();
 }
 
