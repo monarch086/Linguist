@@ -10,25 +10,26 @@
 <h2>Тренировка</h2>
 <h3 id="counter">Все слова</h3>
 
-<hr/>
-<br/>
+<hr />
+<br />
 
-<div id="main" class="row col-md-12 col-sm-12 col-xs-12">
-    <div class="hidden-xs" id="left-block">
-        <img src="~/Resources/navigate-left.png" id="left" /> 
+<div id="main" class="row">
+
+    <div class="col-md-4 col-sm-3 col-xs-2">
+        <a id="left-block"></a>
     </div>
-    <a id="left-block-mobile" class="visible-xs" onclick="moveLeft()"></a>
 
-    <div id="central-block">
-        <img src="~/Resources/paper.png" id="card"/>
-        <div id="word"></div>
+    <div class="col-md-4 col-sm-6 col-xs-8">
+        <div id="card">
+            <div id="word"></div>
+        </div>
         <button name="button" id="translationBtn" class="btn btn-default hidden-xs">Показать перевод</button>
     </div>
-    
-    <div class="hidden-xs" id="right-block">
-        <img src="~/Resources/navigate-right.png" id="right" />
+
+    <div class="col-md-4 col-sm-3 col-xs-2">
+        <a id="right-block"></a>
     </div>
-    <a id="right-block-mobile" class="visible-xs" onclick="moveRight()"></a>
+
 </div>
 
 <script>

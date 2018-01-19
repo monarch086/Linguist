@@ -22,14 +22,15 @@ function clickHandler(event) {
     
     var pressedElement = event.srcElement;
 
-    if (pressedElement === document.getElementById("left"))
+    if (pressedElement === document.getElementById("left-block"))
         moveLeft();
 
-    else if (pressedElement === document.getElementById("right"))
+    else if (pressedElement === document.getElementById("right-block"))
         moveRight();
 
     else if (pressedElement === document.getElementById("translationBtn") ||
-        pressedElement === document.getElementById("card"))
+        pressedElement === document.getElementById("card") || 
+        pressedElement === document.getElementById("word"))
         showTranslation();
 }
 
@@ -54,7 +55,7 @@ function moveRight() {
 function showTranslation()
 {
     if (!isTranslation) {
-        word.innerHTML = '<h3><b>' + words[currentPosition].Translation + '</b></h3>';
+        word.innerHTML = words[currentPosition].Translation;
         translationBtn.innerHTML = 'Спрятать перевод';
         isTranslation = true;
     } else {
@@ -65,7 +66,7 @@ function showTranslation()
 }
 
 function loadWord() {
-    word.innerHTML = '<h3><b>' + words[currentPosition].OriginalWord + '</b></h3>';
+    word.innerHTML = words[currentPosition].OriginalWord;
 }
 
 function updateCounter() {
