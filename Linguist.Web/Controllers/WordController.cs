@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
 using System.Text;
 using Linguist.Web.Models;
+using System.Web;
+using Linguist.Web.Extensions;
 
 namespace Linguist.Web.Controllers
 {
@@ -127,24 +128,24 @@ namespace Linguist.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Word word)
+        public ActionResult Edit(WordViewModel model)
         {
-            if (word == null)
+            if (model == null)
             {
                 var operationMessage = "Ошибка редактирования слова";
                 return Redirect(Url.Action("MyWords", "Home", new { message = operationMessage }));
             }
 
-            if (_wordsService.EditWord(word))
+            if (_wordsService.EditWord(model.Word))
             {
-                var operationMessage = $"Слово {word.OriginalWord} сохранено";
-                return Redirect(Url.Action("MyWords", "Home", new {message = operationMessage}));
+                var operationMessage = $"Слово {model.Word.OriginalWord} сохранено";
+                var returnUrl = model.ReturnUrl.AddMessageToReturnUrl(operationMessage);
+
+                return Redirect(returnUrl);
             }
-            else
-            {
-                //var operationMessage = $"Ошибка сохранения слова {word.OriginalWord}";
-                return Redirect(Url.Action("MyWords", "Home", null));
-            }
+
+            //var operationMessage = $"Ошибка сохранения слова {word.OriginalWord}";
+            return Redirect(model.ReturnUrl);
         }
 
         private IEnumerable<SelectListItem> GetUserCategoriesAsSelectList(int selectedCategoryId = 0)
