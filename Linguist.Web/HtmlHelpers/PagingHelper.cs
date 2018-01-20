@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Linguist.Web.Models;
@@ -17,8 +18,25 @@ namespace Linguist.Web.HtmlHelpers
 
             StringBuilder result = new StringBuilder();
 
+            int[] pagesToShow = {1, pagingInfo.CurrentPage - 1, pagingInfo.CurrentPage, pagingInfo.CurrentPage + 1, pagingInfo.TotalPages };
+
             for (int i = 1; i <= pagingInfo.TotalPages; i++)
             {
+                if (pagingInfo.TotalPages > 5)
+                {
+                    if (!pagesToShow.Contains(i))
+                    {
+                        if (i == pagingInfo.CurrentPage - 2 || i == pagingInfo.CurrentPage + 2)
+                        {
+                            TagBuilder tagP = new TagBuilder("div");
+                            tagP.InnerHtml = "...";
+                            tagP.MergeAttribute("style", "float:left; margin:0 10px;");
+                            result.Append(tagP);
+                        }
+                        continue;
+                    }
+                }
+
                 TagBuilder tag = new TagBuilder("a");
 
                 if (pageUrl != null)
