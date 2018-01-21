@@ -39,7 +39,6 @@ function moveLeft() {
         currentPosition--;
         loadWord();
         updateCounter();
-        resetTranslations();
     }
 }
 
@@ -48,7 +47,6 @@ function moveRight() {
         currentPosition++;
         loadWord();
         updateCounter();
-        resetTranslations();
     }
 }
 
@@ -59,21 +57,20 @@ function showTranslation()
         translationBtn.innerHTML = 'Спрятать перевод';
         isTranslation = true;
     } else {
-        loadWord();
+        word.innerHTML = words[currentPosition].OriginalWord;
         translationBtn.innerHTML = 'Показать перевод';
         isTranslation = false;
     }
 }
 
 function loadWord() {
-    word.innerHTML = words[currentPosition].OriginalWord;
+    if (!isTranslation) {
+        word.innerHTML = words[currentPosition].OriginalWord;
+    } else {
+        word.innerHTML = words[currentPosition].Translation;
+    }
 }
 
 function updateCounter() {
     counter.innerHTML = 'Все слова (' + (currentPosition + 1) + '/' + words.length + ')';
-}
-
-function resetTranslations() {
-    translationBtn.innerHTML = 'Показать перевод';
-    isTranslation = false;
 }
