@@ -129,7 +129,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\LoginStyles.css" />
     <Content Include="Content\MyWordsMobileStyles.css" />
-    <Content Include="Content\TrainStyles.css" />
+    <Content Include="Content\testStyles.css" />
+    <Content Include="Content\trainStyles.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -159,8 +160,11 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\myWordsController.js" />
+    <Content Include="Scripts\testController.js" />
     <Content Include="Scripts\trainingController.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -169,6 +173,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\WordController.cs" />
     <Compile Include="Extensions\UrlStringExtensions.cs" />
@@ -207,6 +212,9 @@
     <Content Include="Views\Home\SearchWords.cshtml" />
     <Content Include="Views\Home\SearchPager.cshtml" />
     <Content Include="Views\Home\SearchWords.Mobile.cshtml" />
+    <Content Include="Views\Test\Main.cshtml" />
+    <Content Include="Views\Test\Test.cshtml" />
+    <Content Include="Views\Test\CategoryTest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
