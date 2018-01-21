@@ -43,10 +43,5 @@ namespace Linguist.Web.Controllers
 
             return View("~/Views/Training/Training.cshtml", words);
         }
-
-        public ActionResult LastWords(int quantityOfWords)
-        {
-            return View();
-        }
     }
 }

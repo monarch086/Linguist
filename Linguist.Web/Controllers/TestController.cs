@@ -53,6 +53,16 @@ namespace Linguist.Web.Controllers
             return View("~/Views/Test/Test.cshtml", words);
         }
 
+        public ActionResult CategoryWords(int categoryId)
+        {
+            var words = _wordsService.GetWordsByCategory(categoryId).ToList();
+
+            var rnd = new Random();
+            words = words.OrderBy(item => rnd.Next()).ToList();
+
+            return View("~/Views/Test/Test.cshtml", words);
+        }
+
         public void SaveTestResults(int[] rightWords, int[] wrongWords)
         {
             _wordsService.IncreaseRememberIndex(rightWords);
