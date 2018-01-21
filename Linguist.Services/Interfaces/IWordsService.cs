@@ -16,5 +16,9 @@ namespace Linguist.Services.Interfaces
         Word GetWordById(int wordId);
 
         bool WordIsAlreadySaved(string login, string originalWord);
+
+        void IncreaseRememberIndex(int[] words);
+
+        void DecreaseRememberIndex(int[] words);
     }
 }

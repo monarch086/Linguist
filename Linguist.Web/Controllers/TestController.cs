@@ -29,9 +29,34 @@ namespace Linguist.Web.Controllers
             var words = _userService.GetUserWords(login).ToList();
 
             var rnd = new Random();
-            words = words.OrderBy(item => rnd.Next()).ToList();
+
+            var wordsFrom0To3 = words
+                .Where(w => w.RememberIndex < 4)
+                .OrderBy(item => rnd.Next())
+                .Take(20).ToList();
+
+            var wordsFrom4To7 = words
+                .Where(w => w.RememberIndex >= 4 && w.RememberIndex < 8)
+                .OrderBy(item => rnd.Next())
+                .Take(10).ToList();
+
+            var wordsFrom8To9 = words
+                .Where(w => w.RememberIndex >= 8)
+                .OrderBy(item => rnd.Next())
+                .Take(5).ToList();
+
+            words.Clear();
+            words.AddRange(wordsFrom0To3);
+            words.AddRange(wordsFrom4To7);
+            words.AddRange(wordsFrom8To9);
 
             return View("~/Views/Test/Test.cshtml", words);
+        }
+
+        public void SaveTestResults(int[] rightWords, int[] wrongWords)
+        {
+            _wordsService.IncreaseRememberIndex(rightWords);
+            _wordsService.DecreaseRememberIndex(wrongWords);
         }
     }
 }

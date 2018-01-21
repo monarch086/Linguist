@@ -76,5 +76,33 @@ namespace Linguist.Services.Implementation
             var userWords = _usersService.GetUserWords(login).Select(w => w.OriginalWord.ToLower());
             return userWords.Contains(originalWord);
         }
+
+        public void IncreaseRememberIndex(int[] wordsIds)
+        {
+            var words = _wordsRepository.GetAll().Where(w => wordsIds.Contains(w.WordId));
+
+            foreach (var word in words)
+            {
+                if (word.RememberIndex < 9)
+                {
+                    word.RememberIndex++;
+                    _wordsRepository.Edit(word);
+                }
+            }
+        }
+
+        public void DecreaseRememberIndex(int[] wordsIds)
+        {
+            var words = _wordsRepository.GetAll().Where(w => wordsIds.Contains(w.WordId));
+
+            foreach (var word in words)
+            {
+                if (word.RememberIndex > 0)
+                {
+                    word.RememberIndex--;
+                    _wordsRepository.Edit(word);
+                }
+            }
+        }
     }
 }

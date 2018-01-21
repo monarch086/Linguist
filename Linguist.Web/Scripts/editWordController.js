@@ -79,8 +79,6 @@ function saveAction(wordId) {
         return category.id;
     });
 
-    console.log(categoryIds);
-
     jQuery.ajaxSettings.traditional = true;
 
     $.get("/Word/UpdateWordCategories",
