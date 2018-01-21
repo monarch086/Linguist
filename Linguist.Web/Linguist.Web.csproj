@@ -169,6 +169,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\WordController.cs" />
     <Compile Include="Extensions\UrlStringExtensions.cs" />
@@ -207,6 +208,8 @@
     <Content Include="Views\Home\SearchWords.cshtml" />
     <Content Include="Views\Home\SearchPager.cshtml" />
     <Content Include="Views\Home\SearchWords.Mobile.cshtml" />
+    <Content Include="Views\Test\Main.cshtml" />
+    <Content Include="Views\Test\Test.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
