@@ -23,7 +23,7 @@ namespace Linguist.Web.Controllers
             return View();
         }
 
-        public ActionResult AllWords()
+        public ActionResult AllWords(bool showForeign = true)
         {
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
             var words = _userService.GetUserWords(login).ToList();
@@ -49,6 +49,8 @@ namespace Linguist.Web.Controllers
             words.AddRange(wordsFrom0To3);
             words.AddRange(wordsFrom4To7);
             words.AddRange(wordsFrom8To9);
+
+            //ViewBag.showForeign = showForeign;
 
             return View("~/Views/Test/Test.cshtml", words);
         }

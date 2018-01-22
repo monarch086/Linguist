@@ -33,7 +33,7 @@ function start() {
 }
 
 function loadWord() {
-    questionWord.innerHTML = words[currentPosition].OriginalWord;
+    questionWord.innerHTML = words[currentPosition].Translation;
     answerWord.innerHTML = "";
 }
 
@@ -45,7 +45,7 @@ function updateCounters() {
 
 function showAnswer() {
     if (isAnswerClosed) {
-        answerWord.innerHTML = words[currentPosition].Translation;
+        answerWord.innerHTML = words[currentPosition].OriginalWord;
         setRedGreenBackground();
         isAnswerClosed = false;
         return;

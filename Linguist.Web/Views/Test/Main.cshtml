@@ -12,7 +12,7 @@
 
         <div class="col-md-6 col-sm-6 col-xs-10" style="margin-bottom: 30px;">
             <p>
-                @Html.ActionLink("Все слова", "AllWords", "Test", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Все слова", "AllWords", "Test", new { showForeign = true }, new { @class = "btn btn-default" })
             </p>
             <p>
                 @Html.Action("CategoryMenu", "Category", new { test = true })
@@ -22,7 +22,7 @@
         <div class="col-md-6 col-sm-6 col-xs-10">
             <label>Направление перевода:</label>
             <div class="radio">
-                <label><input type="radio" name="optradio">с иностранного языка</label>
+                <label><input type="radio" name="optradio" checked="checked">с иностранного языка</label>
             </div>
             <div class="radio">
                 <label><input type="radio" name="optradio">с родного языка</label>
