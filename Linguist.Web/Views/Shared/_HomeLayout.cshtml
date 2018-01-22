@@ -28,13 +28,19 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li>
-                    @Html.ActionLink("Мои слова", "MyWords", "Home")
+                    <a href="@Url.Action("MyWords", "Home")"><span class="glyphicon glyphicon-book"></span> Мои слова</a>
                 </li>
                 <li>
-                    @Html.ActionLink("Тренировка", "Main", "Training")
+                    <a href="@Url.Action("Main", "Training")"><span class="glyphicon glyphicon-hourglass"></span> Тренировка</a>
                 </li>
                 <li>
-                    @Html.ActionLink("Тест", "Main", "Test")
+                    <a href="@Url.Action("Main", "Test")"><span class="glyphicon glyphicon-flag"></span> Тест</a>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-stats"></span> Результаты</a>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-cog"></span> Настройки</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
