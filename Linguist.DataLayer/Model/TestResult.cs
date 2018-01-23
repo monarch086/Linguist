@@ -6,7 +6,7 @@ namespace Linguist.DataLayer.Model
     {
         public int TestResultId { get; set; }
 
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public DateTime Date { get; set; }
 

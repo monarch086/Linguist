@@ -1,5 +1,6 @@
 ﻿using Linguist.DataLayer.Model;
 using Linguist.DataLayer.Repositories;
+using Linguist.DataLayer.Repositories.LogRepositories;
 using Ninject.Modules;
 
 namespace Linguist.Services.DI
@@ -12,6 +13,10 @@ namespace Linguist.Services.DI
             Bind<IRepository<Word>>().To<WordsRepository>();
             Bind<IRepository<Category>>().To<CategoriesRepository>();
             Bind<IRepository<CatWordRelation>>().To<CatWordRelationsRepository>();
+
+            Bind<IRepository<TestResult>>().To<TestResultsRepository>();
+            Bind<IRepository<TrainingResult>>().To<TrainingResultsRepository>();
+            Bind<IRepository<Visitor>>().To<VisitorsRepository>();
         }
     }
 }
