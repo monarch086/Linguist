@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
+using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
 
 namespace Linguist.Web.Controllers
@@ -10,12 +12,14 @@ namespace Linguist.Web.Controllers
         private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
         private readonly IWordsService _wordsService;
+        private readonly IResultsService _resultsService;
 
-        public TestController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, ICategoriesService categoriesService)
+        public TestController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, ICategoriesService categoriesService, IResultsService resultsService)
         {
             _userService = userService;
             _wordsService = wordsService;
             _accountsService = accountsService;
+            _resultsService = resultsService;
         }
 
         public ActionResult Main()
@@ -69,6 +73,22 @@ namespace Linguist.Web.Controllers
         {
             _wordsService.IncreaseRememberIndex(rightWords);
             _wordsService.DecreaseRememberIndex(wrongWords);
+
+            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+            var user = _userService.GetUserByLogin(login);
+
+            var rightWordsString = String.Join(",", rightWords);
+            var wrongWordsString = String.Join(",", wrongWords);
+
+            var result = new TestResult
+            {
+                UserId = user.UserId,
+                Date = DateTime.UtcNow,
+                RightWords = rightWordsString,
+                WrongWords = wrongWordsString
+            };
+
+            _resultsService.AddTestResult(result);
         }
     }
 }
