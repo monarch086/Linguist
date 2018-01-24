@@ -1,4 +1,6 @@
-﻿using Linguist.DataLayer.Repositories;
+﻿using System;
+using System.Web;
+using Linguist.DataLayer.Repositories;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
 
@@ -8,13 +10,28 @@ namespace Linguist.Services.Implementation
     {
         private readonly IRepository<Visitor> _visitorsRepository;
 
-        public LogsService(IRepository<Visitor> visitorsRepository)
+        private readonly IAccountsService _accountsService;
+
+        public LogsService(IRepository<Visitor> visitorsRepository, IAccountsService accountsService)
         {
             _visitorsRepository = visitorsRepository;
+            _accountsService = accountsService;
         }
 
-        public void AddVisitor(Visitor visitor)
+        public void AddVisitor(HttpContext context)
         {
+            var request = context.Request;
+
+            var login = _accountsService.GetUserName(context);
+
+            Visitor visitor = new Visitor
+            {
+                Login = login,
+                Ip = request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? request.UserHostAddress,
+                Url = request.RawUrl,
+                Date = DateTime.Now
+            };
+
             _visitorsRepository.Add(visitor);
         }
     }

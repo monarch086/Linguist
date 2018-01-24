@@ -13,22 +13,29 @@ namespace Linguist.Web.Controllers
         private readonly IUsersService _userService;
         private readonly IWordsService _wordsService;
         private readonly ICategoriesService _categoriesService;
+        private readonly ILogsService _logsService;
+
         private readonly int pageSize = 10;
 
-        public HomeController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, ICategoriesService categoriesService)
+        public HomeController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, ICategoriesService categoriesService, ILogsService logsService)
         {
             _accountsService = accountsService;
             _userService = userService;
             _wordsService = wordsService;
             _categoriesService = categoriesService;
+            _logsService = logsService;
         }
 
         public ActionResult MyWords(int page = 1, int categoryId = 0, string message = null)
         {
-            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
+            var context = System.Web.HttpContext.Current;
+
+            var login = _accountsService.GetUserName(context);
 
             if (string.IsNullOrEmpty(login))
                 return Redirect(Url.Action("Start", "Account"));
+
+            _logsService.AddVisitor(context);
 
             if (page < 1)
                 page = 1;

@@ -1,9 +1,9 @@
-﻿using Linguist.DataLayer.Model;
+﻿using System.Web;
 
 namespace Linguist.Services.Interfaces
 {
     public interface ILogsService
     {
-        void AddVisitor(Visitor visitor);
+        void AddVisitor(HttpContext context);
     }
 }
