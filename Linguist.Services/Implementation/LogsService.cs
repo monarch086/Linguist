@@ -29,7 +29,9 @@ namespace Linguist.Services.Implementation
                 Login = login,
                 Ip = request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? request.UserHostAddress,
                 Url = request.RawUrl,
-                Date = DateTime.Now
+                Date = DateTime.UtcNow,
+                Browser = request.Browser.Browser,
+                IsMobileDevice = request.Browser.IsMobileDevice
             };
 
             _visitorsRepository.Add(visitor);
