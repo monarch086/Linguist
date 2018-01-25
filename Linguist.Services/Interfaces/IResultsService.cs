@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using Linguist.DataLayer.Model;
 
 namespace Linguist.Services.Interfaces
 {
     public interface IResultsService
     {
-        void AddTestResult(TestResult result);
+        void AddTestResult(HttpContext context, int[] rightWords, int[] wrongWords);
 
         IEnumerable<TestResult> GetTestResultsByUserId(int userId);
 

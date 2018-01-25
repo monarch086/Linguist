@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using Linguist.DataLayer.Repositories;
 using Linguist.DataLayer.Model;
@@ -21,20 +22,28 @@ namespace Linguist.Services.Implementation
         public void AddVisitor(HttpContext context)
         {
             var request = context.Request;
-
             var login = _accountsService.GetUserName(context);
+            var ip = request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? request.UserHostAddress;
 
-            Visitor visitor = new Visitor
+            var lastVisit = _visitorsRepository.GetAll()
+                .Where(v => v.Login == login && v.Ip == ip)
+                .OrderByDescending(v => v.Date)
+                .FirstOrDefault();
+
+            if (lastVisit != null && lastVisit.Date.AddMinutes(10.00) < DateTime.UtcNow)
             {
-                Login = login,
-                Ip = request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? request.UserHostAddress,
-                Url = request.RawUrl,
-                Date = DateTime.UtcNow,
-                Browser = request.Browser.Browser,
-                IsMobileDevice = request.Browser.IsMobileDevice
-            };
+                Visitor visitor = new Visitor
+                {
+                    Login = login,
+                    Ip = ip,
+                    Url = request.RawUrl,
+                    Date = DateTime.UtcNow,
+                    Browser = request.Browser.Browser,
+                    IsMobileDevice = request.Browser.IsMobileDevice
+                };
 
-            _visitorsRepository.Add(visitor);
+                _visitorsRepository.Add(visitor);
+            }
         }
     }
 }

@@ -74,21 +74,7 @@ namespace Linguist.Web.Controllers
             _wordsService.IncreaseRememberIndex(rightWords);
             _wordsService.DecreaseRememberIndex(wrongWords);
 
-            var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
-            var user = _userService.GetUserByLogin(login);
-
-            var rightWordsString = String.Join(",", rightWords);
-            var wrongWordsString = String.Join(",", wrongWords);
-
-            var result = new TestResult
-            {
-                UserId = user.UserId,
-                Date = DateTime.UtcNow,
-                RightWords = rightWordsString,
-                WrongWords = wrongWordsString
-            };
-
-            _resultsService.AddTestResult(result);
+            _resultsService.AddTestResult(System.Web.HttpContext.Current, rightWords, wrongWords);
         }
     }
 }
