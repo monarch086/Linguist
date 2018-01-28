@@ -4,6 +4,7 @@ using System.Text;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
+using Linguist.Web.Extensions;
 
 namespace Linguist.Web.Controllers
 {
@@ -54,6 +55,8 @@ namespace Linguist.Web.Controllers
             words.AddRange(wordsFrom4To7);
             words.AddRange(wordsFrom8To9);
 
+            words.TransformStarSigns();
+
             //ViewBag.showForeign = showForeign;
 
             return View("~/Views/Test/Test.cshtml", words);
@@ -65,6 +68,8 @@ namespace Linguist.Web.Controllers
 
             var rnd = new Random();
             words = words.OrderBy(item => rnd.Next()).ToList();
+
+            words.TransformStarSigns();
 
             return View("~/Views/Test/Test.cshtml", words);
         }

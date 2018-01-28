@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Linguist.Services.Interfaces;
+using Linguist.Web.Extensions;
 
 namespace Linguist.Web.Controllers
 {
@@ -29,7 +30,7 @@ namespace Linguist.Web.Controllers
             var words = _userService.GetUserWords(login).ToList();
 
             var rnd = new Random();
-            words = words.OrderBy(item => rnd.Next()).ToList();
+            words = words.OrderBy(item => rnd.Next()).TransformStarSigns().ToList();
 
             return View("~/Views/Training/Training.cshtml", words);
         }
@@ -39,7 +40,7 @@ namespace Linguist.Web.Controllers
             var words = _wordsService.GetWordsByCategory(categoryId).ToList();
 
             var rnd = new Random();
-            words = words.OrderBy(item => rnd.Next()).ToList();
+            words = words.OrderBy(item => rnd.Next()).TransformStarSigns().ToList();
 
             return View("~/Views/Training/Training.cshtml", words);
         }

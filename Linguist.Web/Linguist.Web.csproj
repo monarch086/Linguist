@@ -173,11 +173,13 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\WordController.cs" />
     <Compile Include="Extensions\UrlStringExtensions.cs" />
+    <Compile Include="Extensions\WordFormattingExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +218,7 @@
     <Content Include="Views\Test\Main.cshtml" />
     <Content Include="Views\Test\Test.cshtml" />
     <Content Include="Views\Test\CategoryTest.cshtml" />
+    <Content Include="Views\Options\Main.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

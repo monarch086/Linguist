@@ -16,7 +16,7 @@
     display: table;
     position: relative;
     margin: auto;
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 50px;
 }
 
@@ -24,7 +24,7 @@
     font-size: 36pt;
     display: table-cell;
     text-align: center;
-    font-weight: bold;
+    font-weight: 200;
     vertical-align: middle;
 }
 
@@ -49,6 +49,6 @@
     font-size: 36pt;
     display: table-cell;
     text-align: center;
-    font-weight: bold;
+    font-weight: 200;
     vertical-align: middle;
 }

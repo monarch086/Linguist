@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
+using Linguist.Web.Extensions;
 using Linguist.Web.Models;
 
 namespace Linguist.Web.Controllers
@@ -47,7 +48,9 @@ namespace Linguist.Web.Controllers
             {
                 words = _userService.GetUserWords(login)
                     .Skip((page - 1) * pageSize)
-                    .Take(pageSize).ToList();
+                    .Take(pageSize)
+                    .TransformStarSigns()
+                    .ToList();
 
                 totalWordsCount = _userService.GetUserWords(login).Count();
             }
@@ -56,7 +59,9 @@ namespace Linguist.Web.Controllers
             {
                 words = _wordsService.GetWordsByCategory(categoryId)
                     .Skip((page - 1) * pageSize)
-                    .Take(pageSize).ToList();
+                    .Take(pageSize)
+                    .TransformStarSigns()
+                    .ToList();
 
                 totalWordsCount = _wordsService.GetWordsByCategory(categoryId).Count();
             }
@@ -74,9 +79,11 @@ namespace Linguist.Web.Controllers
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
 
             var words = _userService.GetUserWords(login)
-                .Where(w => w.OriginalWord.ToLower().Contains(word) || w.Translation.ToLower().Contains(word))
+                .Where(w => w.OriginalWord.ToLower().RemoveStarSigns().Contains(word) || w.Translation.ToLower().RemoveStarSigns().Contains(word))
                 .Skip((page - 1) * pageSize)
-                .Take(pageSize).ToList();
+                .TransformStarSigns()
+                .Take(pageSize)
+                .ToList();
 
             var model = GetMyWordsModelFromWords(words, 0, 0, 0, null);
 

@@ -16,10 +16,12 @@
     @foreach (var item in Model.WordsWithCategories)
     {
         var word = item.Word;
-
         <tr>
             <td>
-                @Html.ActionLink(word.OriginalWord, "Edit", "Word", new { wordId = word.WordId, returnUrl = Request.Url.PathAndQuery }, null)
+                @*<a href=""> ni<strong>m</strong>a<strong>n</strong>d </a>*@
+                <a href=@Url.Action("Edit", "Word", new {wordId = word.WordId, returnUrl = Request.Url.PathAndQuery}, null)>
+                    @Html.Raw(word.OriginalWord)
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => word.Translation)
