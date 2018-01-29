@@ -79,7 +79,7 @@ namespace Linguist.Web.Controllers
             var login = _accountsService.GetUserName(System.Web.HttpContext.Current);
 
             var words = _userService.GetUserWords(login)
-                .Where(w => w.OriginalWord.ToLower().RemoveStarSigns().Contains(word) || w.Translation.ToLower().RemoveStarSigns().Contains(word))
+                .Where(w => w.OriginalWord.ToLower().RemoveFormatSigns().Contains(word) || w.Translation.ToLower().RemoveFormatSigns().Contains(word))
                 .Skip((page - 1) * pageSize)
                 .TransformStarSigns()
                 .Take(pageSize)

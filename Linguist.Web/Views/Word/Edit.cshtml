@@ -19,6 +19,7 @@
             @Html.HiddenFor(model => model.Word.WordId)
             @Html.HiddenFor(model => model.Word.UserId)
             @Html.HiddenFor(model => model.Word.DateAdded)
+            @Html.HiddenFor(model => model.Word.RememberIndex)
 
             <div class="form-group">
                 @Html.Label("Слово или фраза:", new { @class = "control-label col-md-2" })
@@ -33,15 +34,6 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Word.Translation, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Word.Translation, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                @Html.Label("Индекс запоминания: ", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Word.RememberIndex, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Word.RememberIndex, "", new { @class = "text-danger" })
                 </div>
             </div>
             

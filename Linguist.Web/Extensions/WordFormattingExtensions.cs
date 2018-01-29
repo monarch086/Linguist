@@ -26,7 +26,7 @@ namespace Linguist.Web.Extensions
             return words;
         }
 
-        public static string RemoveStarSigns(this string word)
+        public static string RemoveFormatSigns(this string word)
         {
             return word.Replace("*", string.Empty).Replace("<b>", string.Empty).Replace("</b>", string.Empty);
         }
