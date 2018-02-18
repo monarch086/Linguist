@@ -1,0 +1,85 @@
+﻿@model Linguist.Web.Models.StatisticsViewModel
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<h2>Статистика</h2>
+
+<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" style="text-align: left">
+
+    <hr />
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <canvas id="wordsRememberChart" width="100" height="100"></canvas>
+    </div>
+    
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <canvas id="wordsAddedChart" width="100" height="100"></canvas>
+    </div>
+
+</div>
+
+
+<script>
+    var ctxRemembered = document.getElementById("wordsRememberChart").getContext('2d');
+
+    dataRemembered = {
+        datasets: [{
+            data: [@Model.WordsFrom0To3, @Model.WordsFrom4To7, @Model.WordsFrom8To9],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+            ]
+        }],
+
+        labels: [
+            'Незапомненные слова',
+            'Средне запомненные слова',
+            'Хорошо запомненные слова'
+        ]
+    };
+
+    options = {
+        cutoutPercentage: 50,
+        rotation: -0.5 * Math.PI,
+        circumference: 2 * Math.PI,
+        animation: {
+            animateRotate: true,
+            animateScale: false
+        }
+    };
+
+    var wordsRememberChart = new Chart(ctxRemembered, {
+        type: 'doughnut',
+        data: dataRemembered,
+        options: options
+    });
+
+    var ctxAdded = document.getElementById("wordsAddedChart").getContext('2d');
+
+    dataAdded = {
+        datasets: [{
+            data: [@Model.AllWords - @Model.WordsAddedThisMonth, @Model.WordsAddedThisMonth],
+            backgroundColor: [
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ]
+        }],
+
+        labels: [
+            'Ранее добавленные слова',
+            'Добавленные в этом месяце слова'
+        ]
+    };
+
+    var wordsAddedChart = new Chart(ctxAdded, {
+        type: 'doughnut',
+        data: dataAdded,
+        options: options
+    });
+
+</script>

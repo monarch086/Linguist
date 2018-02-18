@@ -188,6 +188,7 @@
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\MyWordsModel.cs" />
+    <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Models\WordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -219,6 +220,7 @@
     <Content Include="Views\Test\Test.cshtml" />
     <Content Include="Views\Test\CategoryTest.cshtml" />
     <Content Include="Views\Options\Main.cshtml" />
+    <Content Include="Views\Results\Statistics.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -229,7 +231,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Results\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Linguist.DataLayer\Linguist.DataLayer.csproj">

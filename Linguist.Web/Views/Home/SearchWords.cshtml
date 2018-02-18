@@ -18,7 +18,6 @@
         var word = item.Word;
         <tr>
             <td>
-                @*<a href=""> ni<strong>m</strong>a<strong>n</strong>d </a>*@
                 <a href=@Url.Action("Edit", "Word", new {wordId = word.WordId, returnUrl = Request.Url.PathAndQuery}, null)>
                     @Html.Raw(word.OriginalWord)
                 </a>

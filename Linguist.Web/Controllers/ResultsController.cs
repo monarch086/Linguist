@@ -1,5 +1,8 @@
-﻿using Linguist.Services.Interfaces;
+﻿using System;
+using System.Linq;
+using Linguist.Services.Interfaces;
 using System.Web.Mvc;
+using Linguist.Web.Models;
 
 namespace Linguist.Web.Controllers
 {
@@ -7,13 +10,11 @@ namespace Linguist.Web.Controllers
     {
         private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
-        private readonly IWordsService _wordsService;
 
-        public ResultsController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService)
+        public ResultsController(IAccountsService accountsService, IUsersService userService)
         {
             _accountsService = accountsService;
             _userService = userService;
-            _wordsService = wordsService;
         }
 
         public ActionResult Statistics()
@@ -23,7 +24,19 @@ namespace Linguist.Web.Controllers
             if (string.IsNullOrEmpty(login))
                 return Redirect(Url.Action("Start", "Account"));
 
-            return View();
+            var userWords = _userService.GetUserWords(login);
+
+            var model = new StatisticsViewModel
+            {
+                AllWords = userWords.Count(),
+                WordsFrom0To3 = userWords.Count(w => w.RememberIndex < 4),
+                WordsFrom4To7 = userWords.Count(w => w.RememberIndex >= 4 && w.RememberIndex < 8),
+                WordsFrom8To9 = userWords.Count(w => w.RememberIndex >= 8),
+                WordsAddedThisMonth = userWords.Count(w => w.DateAdded.Month == DateTime.Today.Month),
+                TrainingsThisWeek = 5
+            };
+
+            return View(model);
         }
     }
 }

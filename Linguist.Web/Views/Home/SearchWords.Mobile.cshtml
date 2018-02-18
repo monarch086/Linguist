@@ -19,7 +19,11 @@
 
         <tr>
             <td>
-                <h4>@Html.ActionLink(word.OriginalWord, "Edit", "Word", new { wordId = word.WordId, returnUrl = Request.Url.PathAndQuery }, null)</h4>
+                <h4>
+                    <a href=@Url.Action("Edit", "Word", new {wordId = word.WordId, returnUrl = Request.Url.PathAndQuery}, null)>
+                        @Html.Raw(word.OriginalWord)
+                    </a>
+                </h4>
             </td>
             <td>
                 <h4>@Html.DisplayFor(modelItem => word.Translation)</h4>
