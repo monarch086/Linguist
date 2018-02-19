@@ -15,9 +15,15 @@
     <div class="col-md-6 col-sm-6 col-xs-12">
         <canvas id="wordsRememberChart" width="100" height="100"></canvas>
     </div>
-    
     <div class="col-md-6 col-sm-6 col-xs-12">
         <canvas id="wordsAddedChart" width="100" height="100"></canvas>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <canvas id="trainingsChart" width="100" height="100"></canvas>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <canvas id="answersChart" width="100" height="100"></canvas>
     </div>
 
 </div>
@@ -80,6 +86,77 @@
         type: 'doughnut',
         data: dataAdded,
         options: options
+    });
+
+    var ctxTrainings = document.getElementById("trainingsChart").getContext('2d');
+
+    trainingsData = {
+        datasets:
+        [
+            {
+                label: 'Пройдено тренировок',
+                data: [12, 15, 20, 3, 10, 6],
+                borderColor: ['rgba(75, 192, 192, 1)']
+            },
+            {
+                label: 'Пройдено тестов',
+                data: [4, 5, 2, 5, 1, 4],
+                borderColor: ['rgba(54, 162, 235, 1)']
+            }
+        ],
+        labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+    };
+
+    trainingsOptions = {
+        animation: {
+            animateRotate: true,
+            animateScale: true
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 30
+                }
+            }]
+        }
+    };
+
+    var trainingsChart = new Chart(ctxTrainings, {
+        type: 'line',
+        data: trainingsData,
+        options: trainingsOptions
+    });
+
+    var ctxAnswers = document.getElementById("answersChart").getContext('2d');
+
+    answersData = {
+        datasets:
+        [
+            {
+                label: 'Правильные ответы',
+                data: [23, 35, 46, 42, 22, 33],
+                borderColor: ['rgba(75, 192, 192, 1)']
+            },
+            {
+                label: 'Неправильные ответы',
+                data: [34, 29, 25, 9, 8, 7],
+                borderColor: ['rgba(255, 99, 132, 1)']
+            }
+        ],
+        labels: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+    };
+
+    answersOptions = {
+        animation: {
+            animateRotate: true,
+            animateScale: true
+        }
+    };
+
+    var answersChart = new Chart(ctxAnswers, {
+        type: 'line',
+        data: answersData,
+        options: answersOptions
     });
 
 </script>
