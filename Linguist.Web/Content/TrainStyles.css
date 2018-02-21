@@ -28,6 +28,14 @@
     vertical-align: middle;
 }
 
+#transcription {
+    font-size: 24pt;
+    display: none;
+    text-align: center;
+    font-weight: 200;
+    vertical-align: middle;
+}
+
 #translationBtn {
     margin-top: 50px;
 }

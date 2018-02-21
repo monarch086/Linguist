@@ -1,5 +1,6 @@
 ﻿var mainDiv,
     word,
+    transcription,
     currentPosition = 0,
     isTranslation = false,
     translationBtn,
@@ -10,6 +11,7 @@ function start() {
 
     mainDiv = document.getElementById("main");
     word = document.getElementById("word");
+    transcription = document.getElementById("transcription");
     translationBtn = document.getElementById("translationBtn");
     counter = document.getElementById("counter");
 
@@ -30,7 +32,8 @@ function clickHandler(event) {
 
     else if (pressedElement === document.getElementById("translationBtn") ||
         pressedElement === document.getElementById("card") || 
-        pressedElement === document.getElementById("word"))
+        pressedElement === word || 
+        pressedElement === transcription)
         showTranslation();
 }
 
@@ -54,10 +57,14 @@ function showTranslation()
 {
     if (!isTranslation) {
         word.innerHTML = words[currentPosition].Translation;
+        transcription.style.display = 'none';
         translationBtn.innerHTML = 'Спрятать перевод';
         isTranslation = true;
     } else {
         word.innerHTML = words[currentPosition].OriginalWord;
+        if (transcription.innerHTML) {
+            transcription.style.display = 'table-row';
+        }
         translationBtn.innerHTML = 'Показать перевод';
         isTranslation = false;
     }
@@ -66,6 +73,15 @@ function showTranslation()
 function loadWord() {
     if (!isTranslation) {
         word.innerHTML = words[currentPosition].OriginalWord;
+
+        if (words[currentPosition].Transcription) {
+            transcription.style.display = 'table-row';
+            transcription.innerHTML = words[currentPosition].Transcription;
+        } else {
+            transcription.style.display = 'none';
+            transcription.innerHTML = null;
+        }
+        
     } else {
         word.innerHTML = words[currentPosition].Translation;
     }

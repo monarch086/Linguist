@@ -10,6 +10,8 @@ namespace Linguist.DataLayer.Model
 
         public string OriginalWord { get; set; }
 
+        public string Transcription { get; set; }
+
         public string Translation { get; set; }
 
         public DateTime DateAdded { get; set; }
