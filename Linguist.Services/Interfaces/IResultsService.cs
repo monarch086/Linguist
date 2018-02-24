@@ -10,7 +10,7 @@ namespace Linguist.Services.Interfaces
 
         IEnumerable<TestResult> GetTestResultsByUserId(int userId);
 
-        void AddTrainingResult(TrainingResult result);
+        void AddTrainingResult(HttpContext context, int[] wordsIds);
 
         IEnumerable<TrainingResult> GetTrainingResultsByUserId(int userId);
 

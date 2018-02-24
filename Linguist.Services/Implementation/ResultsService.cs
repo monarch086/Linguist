@@ -51,8 +51,20 @@ namespace Linguist.Services.Implementation
             return _testResultsRepository.GetAll().Where(r => r.UserId == userId);
         }
 
-        public void AddTrainingResult(TrainingResult result)
+        public void AddTrainingResult(HttpContext context, int[] wordsIds)
         {
+            var login = _accountsService.GetUserName(context);
+            var user = _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
+
+            var wordsString = wordsIds != null ? String.Join(",", wordsIds) : "";
+
+            var result = new TrainingResult
+            {
+                UserId = user.UserId,
+                Date = DateTime.UtcNow,
+                Words = wordsString
+            };
+
             _trainingResultsRepository.Add(result);
         }
 

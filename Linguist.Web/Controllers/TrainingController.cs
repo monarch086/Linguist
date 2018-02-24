@@ -11,12 +11,15 @@ namespace Linguist.Web.Controllers
         private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
         private readonly IWordsService _wordsService;
+        private readonly IResultsService _resultsService;
 
-        public TrainingController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, ICategoriesService categoriesService)
+        public TrainingController(IAccountsService accountsService, IUsersService userService, 
+            IWordsService wordsService, ICategoriesService categoriesService, IResultsService resultsService)
         {
             _userService = userService;
             _wordsService = wordsService;
             _accountsService = accountsService;
+            _resultsService = resultsService;
         }
 
         public ActionResult Main()
@@ -43,6 +46,11 @@ namespace Linguist.Web.Controllers
             words = words.OrderBy(item => rnd.Next()).TransformStarSigns().ToList();
 
             return View("~/Views/Training/Training.cshtml", words);
+        }
+
+        public void SaveTrainingResults(int[] wordsIds)
+        {
+            _resultsService.AddTrainingResult(System.Web.HttpContext.Current, wordsIds);
         }
     }
 }

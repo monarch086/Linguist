@@ -4,7 +4,8 @@
     currentPosition = 0,
     isTranslation = false,
     translationBtn,
-    counter;
+    counter,
+    resultsSaved = false;
 
 window.onload = start;
 function start() {
@@ -51,6 +52,10 @@ function moveRight() {
         loadWord();
         updateCounter();
     }
+
+    if (currentPosition === words.length - 1) {
+        saveTrainingResults();
+    }
 }
 
 function showTranslation()
@@ -89,4 +94,19 @@ function loadWord() {
 
 function updateCounter() {
     counter.innerHTML = 'Все слова (' + (currentPosition + 1) + '/' + words.length + ')';
+}
+
+function saveTrainingResults() {
+    if (!resultsSaved) {
+        jQuery.ajaxSettings.traditional = true;
+
+        $.get("/Training/SaveTrainingResults",
+            {
+                wordsIds: words.map(function (word) {
+                    return word.WordId;
+                })
+            });
+
+        resultsSaved = true;
+    }
 }
