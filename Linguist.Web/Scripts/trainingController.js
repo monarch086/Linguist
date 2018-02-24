@@ -5,7 +5,9 @@
     isTranslation = false,
     translationBtn,
     counter,
-    resultsSaved = false;
+    resultsSaved = false,
+    xDown = null,
+    xUp = null;
 
 window.onload = start;
 function start() {
@@ -19,6 +21,10 @@ function start() {
     mainDiv.onclick = clickHandler;
     loadWord();
     updateCounter();
+    
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchmove', handleTouchMove, false);
+    document.addEventListener('touchend', handleTouchEnd, false);
 }
 
 function clickHandler(event) {
@@ -109,4 +115,34 @@ function saveTrainingResults() {
 
         resultsSaved = true;
     }
+}
+
+function handleTouchStart(evt) {
+    xDown = evt.touches[0].clientX;
+};
+
+function handleTouchMove(evt) {
+    if (!xDown) {
+        return;
+    }
+    xUp = evt.touches[0].clientX;
+};
+
+function handleTouchEnd(evt) {
+    if (!xUp) {
+        return;
+    }
+
+    var xDiff = xDown - xUp;
+
+    if (Math.abs(xDiff) > 100) {
+        if (xDiff > 0) {
+            moveRight();
+        } else {
+            moveLeft();
+        }
+    }
+    
+    xUp = null;
+    xDown = null;
 }
