@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DI\ServServiceModule.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Implementation\AccountsService.cs" />
     <Compile Include="Implementation\CategoriesService.cs" />
     <Compile Include="Implementation\LogsService.cs" />

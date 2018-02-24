@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Linguist.DataLayer.Model;
-using Linguist.Services.Interfaces;
+﻿using Linguist.Services.Interfaces;
 using Linguist.Web.Extensions;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Linguist.Web.Controllers
 {

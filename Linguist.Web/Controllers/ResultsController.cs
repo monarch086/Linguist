@@ -10,11 +10,13 @@ namespace Linguist.Web.Controllers
     {
         private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
+        private readonly IResultsService _resultsService;
 
-        public ResultsController(IAccountsService accountsService, IUsersService userService)
+        public ResultsController(IAccountsService accountsService, IUsersService userService, IResultsService resultsService)
         {
             _accountsService = accountsService;
             _userService = userService;
+            _resultsService = resultsService;
         }
 
         public ActionResult Statistics()
@@ -33,7 +35,7 @@ namespace Linguist.Web.Controllers
                 WordsFrom4To7 = userWords.Count(w => w.RememberIndex >= 4 && w.RememberIndex < 8),
                 WordsFrom8To9 = userWords.Count(w => w.RememberIndex >= 8),
                 WordsAddedThisMonth = userWords.Count(w => w.DateAdded.Month == DateTime.Today.Month),
-                TrainingsThisWeek = 5
+                TestsTakenLastWeek = _resultsService.GetTestsCountPerWeek(login)
             };
 
             return View(model);

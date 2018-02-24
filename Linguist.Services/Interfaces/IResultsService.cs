@@ -13,5 +13,7 @@ namespace Linguist.Services.Interfaces
         void AddTrainingResult(TrainingResult result);
 
         IEnumerable<TrainingResult> GetTrainingResultsByUserId(int userId);
+
+        int[] GetTestsCountPerWeek(string login, int week = 0);
     }
 }
