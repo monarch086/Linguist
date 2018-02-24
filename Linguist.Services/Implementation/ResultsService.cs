@@ -31,8 +31,8 @@ namespace Linguist.Services.Implementation
             var login = _accountsService.GetUserName(context);
             var user = _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
 
-            var rightWordsString = String.Join(",", rightWords);
-            var wrongWordsString = String.Join(",", wrongWords);
+            var rightWordsString = rightWords != null ? String.Join(",", rightWords) : "";
+            var wrongWordsString = wrongWords != null ? String.Join(",", wrongWords) : "";
 
             var result = new TestResult
             {

@@ -79,6 +79,11 @@ namespace Linguist.Services.Implementation
 
         public void IncreaseRememberIndex(int[] wordsIds)
         {
+            if (wordsIds == null)
+            {
+                return;
+            }
+
             var words = _wordsRepository.GetAll().Where(w => wordsIds.Contains(w.WordId));
 
             foreach (var word in words)
@@ -93,6 +98,11 @@ namespace Linguist.Services.Implementation
 
         public void DecreaseRememberIndex(int[] wordsIds)
         {
+            if (wordsIds == null)
+            {
+                return;
+            }
+
             var words = _wordsRepository.GetAll().Where(w => wordsIds.Contains(w.WordId));
 
             foreach (var word in words)
