@@ -133,7 +133,8 @@ namespace Linguist.Services.Implementation
 
             foreach (var tests in testsByDays)
             {
-                wordsCount[tests.Key - 1] = isRightWords ? tests.Sum(t => t.RightWords.Split(',').Length) : tests.Sum(t => t.WrongWords.Split(',').Length);
+                wordsCount[tests.Key - 1] = isRightWords ? tests.Sum(t => !string.IsNullOrEmpty(t.RightWords) ? t.RightWords.Split(',').Length : 0) 
+                    : tests.Sum(t => !string.IsNullOrEmpty(t.WrongWords) ? t.WrongWords.Split(',').Length : 0);
             }
 
             return wordsCount;
