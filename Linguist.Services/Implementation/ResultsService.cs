@@ -94,5 +94,27 @@ namespace Linguist.Services.Implementation
 
             return testsCount;
         }
+
+        public int[] GetTrainingsCountPerWeek(string login, int week)
+        {
+            var user = _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
+
+            DateTime startDate = DateTime.Now.StartOfWeek(DayOfWeek.Monday).AddDays(week * -7);
+            DateTime endOfWeek = DateTime.Now.EndOfWeek(DayOfWeek.Sunday).AddDays(week * -7);
+            DateTime endDate = endOfWeek < DateTime.Now ? endOfWeek : DateTime.Now;
+
+            var daysInWeek = (endDate - startDate).Days + 1;
+            int[] trainingsCount = new int[daysInWeek];
+
+            var trainings = GetTrainingResultsByUserId(user.UserId).Where(tr => tr.Date >= startDate && tr.Date <= endDate)
+                .GroupBy(tr => (int)tr.Date.DayOfWeek);
+
+            foreach (var training in trainings)
+            {
+                trainingsCount[training.Key - 1] = training.Count();
+            }
+
+            return trainingsCount;
+        }
     }
 }

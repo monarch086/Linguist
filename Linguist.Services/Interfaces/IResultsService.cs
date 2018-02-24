@@ -15,5 +15,7 @@ namespace Linguist.Services.Interfaces
         IEnumerable<TrainingResult> GetTrainingResultsByUserId(int userId);
 
         int[] GetTestsCountPerWeek(string login, int week = 0);
+
+        int[] GetTrainingsCountPerWeek(string login, int week = 0);
     }
 }

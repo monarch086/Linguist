@@ -12,10 +12,8 @@
 
         public int WordsAddedThisMonth { get; set; }
 
-        public int TrainingsThisWeek { get; set; }
+        public int[] TrainingsTakenPerWeek { get; set; }
 
-        public int[] TrainingsTakenLastWeek { get; set; }
-
-        public int[] TestsTakenLastWeek { get; set; }
+        public int[] TestsTakenPerWeek { get; set; }
     }
 }

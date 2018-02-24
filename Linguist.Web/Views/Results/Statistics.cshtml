@@ -95,12 +95,12 @@
         [
             {
                 label: 'Пройдено тренировок',
-                data: [12, 15, 20, 3, 10, 6],
+                data: [@string.Join(",", Model.TrainingsTakenPerWeek)],
                 borderColor: ['rgba(75, 192, 192, 1)']
             },
             {
                 label: 'Пройдено тестов',
-                data: [@string.Join(",", Model.TestsTakenLastWeek)],
+                data: [@string.Join(",", Model.TestsTakenPerWeek)],
                 borderColor: ['rgba(54, 162, 235, 1)']
             }
         ],

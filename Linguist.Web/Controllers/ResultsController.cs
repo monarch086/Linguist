@@ -35,7 +35,8 @@ namespace Linguist.Web.Controllers
                 WordsFrom4To7 = userWords.Count(w => w.RememberIndex >= 4 && w.RememberIndex < 8),
                 WordsFrom8To9 = userWords.Count(w => w.RememberIndex >= 8),
                 WordsAddedThisMonth = userWords.Count(w => w.DateAdded.Month == DateTime.Today.Month),
-                TestsTakenLastWeek = _resultsService.GetTestsCountPerWeek(login)
+                TrainingsTakenPerWeek = _resultsService.GetTrainingsCountPerWeek(login),
+                TestsTakenPerWeek = _resultsService.GetTestsCountPerWeek(login)
             };
 
             return View(model);
