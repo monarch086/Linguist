@@ -15,5 +15,9 @@
         public int[] TrainingsTakenPerWeek { get; set; }
 
         public int[] TestsTakenPerWeek { get; set; }
+
+        public int[] RightWordsPerWeek { get; set; }
+
+        public int[] WrongWordsPerWeek { get; set; }
     }
 }

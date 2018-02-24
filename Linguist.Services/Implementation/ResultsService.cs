@@ -116,5 +116,27 @@ namespace Linguist.Services.Implementation
 
             return trainingsCount;
         }
+
+        public int[] GetWordsCountPerWeek(string login, bool isRightWords, int week = 0)
+        {
+            var user = _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
+
+            DateTime startDate = DateTime.Now.StartOfWeek(DayOfWeek.Monday).AddDays(week * -7);
+            DateTime endOfWeek = DateTime.Now.EndOfWeek(DayOfWeek.Sunday).AddDays(week * -7);
+            DateTime endDate = endOfWeek < DateTime.Now ? endOfWeek : DateTime.Now;
+
+            var daysInWeek = (endDate - startDate).Days + 1;
+            int[] wordsCount = new int[daysInWeek];
+
+            var testsByDays = GetTestResultsByUserId(user.UserId).Where(tr => tr.Date >= startDate && tr.Date <= endDate)
+                .GroupBy(tr => (int)tr.Date.DayOfWeek);
+
+            foreach (var tests in testsByDays)
+            {
+                wordsCount[tests.Key - 1] = isRightWords ? tests.Sum(t => t.RightWords.Split(',').Length) : tests.Sum(t => t.WrongWords.Split(',').Length);
+            }
+
+            return wordsCount;
+        }
     }
 }

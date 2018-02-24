@@ -17,5 +17,7 @@ namespace Linguist.Services.Interfaces
         int[] GetTestsCountPerWeek(string login, int week = 0);
 
         int[] GetTrainingsCountPerWeek(string login, int week = 0);
+
+        int[] GetWordsCountPerWeek(string login, bool isRightWords, int week = 0);
     }
 }
