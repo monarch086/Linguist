@@ -13,7 +13,12 @@ namespace Linguist.Services.Extensions
         public static DateTime EndOfWeek(this DateTime dt, DayOfWeek endOfWeek)
         {
             int diff = (7 + (endOfWeek - dt.DayOfWeek)) % 7;
-            return dt.AddDays(diff).Date;
+            return dt.AddDays(diff).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+        }
+
+        public static int ShiftDaysOfWeekToStartFromMonday(this DayOfWeek dayOfWeek)
+        {
+            return (int) (dayOfWeek + 6) % 7;
         }
     }
 }

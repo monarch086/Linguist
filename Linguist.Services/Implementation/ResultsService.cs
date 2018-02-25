@@ -85,11 +85,11 @@ namespace Linguist.Services.Implementation
             int[] testsCount = new int[daysInWeek];
 
             var tests = GetTestResultsByUserId(user.UserId).Where(tr => tr.Date >= startDate && tr.Date <= endDate)
-                .GroupBy(tr => (int)tr.Date.DayOfWeek);
+                .GroupBy(tr => tr.Date.DayOfWeek.ShiftDaysOfWeekToStartFromMonday());
 
             foreach (var test in tests)
             {
-                testsCount[test.Key - 1] = test.Count();
+                testsCount[test.Key] = test.Count();
             }
 
             return testsCount;
@@ -107,11 +107,11 @@ namespace Linguist.Services.Implementation
             int[] trainingsCount = new int[daysInWeek];
 
             var trainings = GetTrainingResultsByUserId(user.UserId).Where(tr => tr.Date >= startDate && tr.Date <= endDate)
-                .GroupBy(tr => (int)tr.Date.DayOfWeek);
+                .GroupBy(tr => tr.Date.DayOfWeek.ShiftDaysOfWeekToStartFromMonday());
 
             foreach (var training in trainings)
             {
-                trainingsCount[training.Key - 1] = training.Count();
+                trainingsCount[training.Key] = training.Count();
             }
 
             return trainingsCount;
@@ -129,11 +129,11 @@ namespace Linguist.Services.Implementation
             int[] wordsCount = new int[daysInWeek];
 
             var testsByDays = GetTestResultsByUserId(user.UserId).Where(tr => tr.Date >= startDate && tr.Date <= endDate)
-                .GroupBy(tr => (int)tr.Date.DayOfWeek);
+                .GroupBy(tr => tr.Date.DayOfWeek.ShiftDaysOfWeekToStartFromMonday());
 
             foreach (var tests in testsByDays)
             {
-                wordsCount[tests.Key - 1] = isRightWords ? tests.Sum(t => !string.IsNullOrEmpty(t.RightWords) ? t.RightWords.Split(',').Length : 0) 
+                wordsCount[tests.Key] = isRightWords ? tests.Sum(t => !string.IsNullOrEmpty(t.RightWords) ? t.RightWords.Split(',').Length : 0) 
                     : tests.Sum(t => !string.IsNullOrEmpty(t.WrongWords) ? t.WrongWords.Split(',').Length : 0);
             }
 
