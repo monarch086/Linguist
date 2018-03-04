@@ -3,7 +3,6 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using Linguist.DataLayer.Context;
 using Linguist.DataLayer.Model;
-using Linguist.DataLayer.UnitOfWork;
 
 namespace Linguist.DataLayer.Repositories
 {
@@ -11,24 +10,21 @@ namespace Linguist.DataLayer.Repositories
     {
         private readonly LinguistContext _context;
 
-        private readonly IUnitOfWork _unitOfWork;
-
         public UsersRepository(LinguistContext context)
         {
             _context = context;
-            _unitOfWork = new UnitOfWork.UnitOfWork(context);
         }
 
         public int Add(User entity)
         {
             _context.Users.Add(entity);
-            return _unitOfWork.Save();
+            return _context.Save();
         }
 
         public int Edit(User entity)
         {
             _context.Users.AddOrUpdate(entity);
-            return _unitOfWork.Save();
+            return _context.Save();
         }
 
         public IEnumerable<User> GetAll()
@@ -41,7 +37,7 @@ namespace Linguist.DataLayer.Repositories
             var user = _context.Users.FirstOrDefault(u => u.UserId == entityId);
             if (user != null)
                 _context.Users.Remove(user);
-            return _unitOfWork.Save();
+            return _context.Save();
         }
     }
 }

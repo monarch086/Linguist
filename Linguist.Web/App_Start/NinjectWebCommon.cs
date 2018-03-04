@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-using Linguist.DataLayer.DI;
 using Linguist.Services.DI;
 using Linguist.Web;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -65,7 +64,6 @@ namespace Linguist.Web
         {
             System.Web.Mvc.DependencyResolver.SetResolver(new Infrastructure.NinjectDependencyResolver(kernel));
 
-            kernel.Load(new DLServiceModule()); //Dependency in DataLayer
             kernel.Load(new ServServiceModule()); //Dependency in Services
         }
     }

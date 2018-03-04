@@ -3,7 +3,6 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using Linguist.DataLayer.Context;
 using Linguist.DataLayer.Model;
-using Linguist.DataLayer.UnitOfWork;
 
 namespace Linguist.DataLayer.Repositories
 {
@@ -11,24 +10,21 @@ namespace Linguist.DataLayer.Repositories
     {
         private readonly LinguistContext _context;
 
-        private readonly IUnitOfWork _unitOfWork;
-
         public CatWordRelationsRepository(LinguistContext context)
         {
             _context = context;
-            _unitOfWork = new UnitOfWork.UnitOfWork(context);
         }
 
         public int Add(CatWordRelation entity)
         {
             _context.CatWordRelations.Add(entity);
-            return _unitOfWork.Save();
+            return _context.Save();
         }
 
         public int Edit(CatWordRelation entity)
         {
             _context.CatWordRelations.AddOrUpdate(entity);
-            return _unitOfWork.Save();
+            return _context.Save();
         }
 
         public IEnumerable<CatWordRelation> GetAll()
@@ -41,7 +37,7 @@ namespace Linguist.DataLayer.Repositories
             var relation = _context.CatWordRelations.FirstOrDefault(r => r.CatWordRelationId == entityId);
             if (relation != null)
                 _context.CatWordRelations.Remove(relation);
-            return _unitOfWork.Save();
+            return _context.Save();
         }
     }
 }

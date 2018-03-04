@@ -20,5 +20,10 @@ namespace Linguist.DataLayer.Context
         public DbSet<TestResult> TestResults { get; set; }
 
         public DbSet<TrainingResult> TrainingResults { get; set; }
+
+        public int Save()
+        {
+            return SaveChanges();
+        }
     }
 }

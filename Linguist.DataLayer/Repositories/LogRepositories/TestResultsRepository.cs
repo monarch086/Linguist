@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Linguist.DataLayer.Context;
 using Linguist.DataLayer.Model;
-using Linguist.DataLayer.UnitOfWork;
 
 namespace Linguist.DataLayer.Repositories.LogRepositories
 {
@@ -11,18 +10,15 @@ namespace Linguist.DataLayer.Repositories.LogRepositories
     {
         private readonly LinguistContext _context;
 
-        private readonly IUnitOfWork _unitOfWork;
-
         public TestResultsRepository(LinguistContext context)
         {
             _context = context;
-            _unitOfWork = new UnitOfWork.UnitOfWork(context);
         }
 
         public int Add(TestResult entity)
         {
             _context.TestResults.Add(entity);
-            return _unitOfWork.Save();
+            return _context.Save();
         }
 
         public int Edit(TestResult entity)
