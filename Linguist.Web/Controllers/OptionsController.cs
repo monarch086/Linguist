@@ -61,5 +61,22 @@ namespace Linguist.Web.Controllers
                 _wordsService.EditWord(word);
             }
         }
+
+        public bool SetNewPassword(string oldPassword, string newPassword)
+        {
+            var context = System.Web.HttpContext.Current;
+
+            var login = _accountsService.GetUserName(context);
+
+            if (string.IsNullOrEmpty(login))
+                return false;
+
+            if (_accountsService.AuthenticateUser(login, oldPassword))
+            {
+                return _accountsService.SetPassword(login, newPassword);
+            }
+
+            return false;
+        }
     }
 }

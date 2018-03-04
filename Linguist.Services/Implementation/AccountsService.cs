@@ -65,5 +65,18 @@ namespace Linguist.Services.Implementation
                 return string.Empty;
             }
         }
+
+        public bool SetPassword(string login, string password)
+        {
+            User user = _usersRepository.GetAll().FirstOrDefault(u => u.Login == login);
+
+            if (user == null)
+                return false;
+
+            user.Salt = ComputeSalt();
+            user.Password = GetHashFromPassword(password, user.Salt);
+
+            return _usersRepository.Edit(user) > 0;
+        }
     }
 }

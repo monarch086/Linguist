@@ -11,5 +11,7 @@ namespace Linguist.Services.Interfaces
         int ComputeSalt();
 
         string GetUserName(HttpContext context);
+
+        bool SetPassword(string login, string password);
     }
 }

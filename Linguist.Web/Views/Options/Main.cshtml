@@ -15,5 +15,23 @@
     <p>
         @Html.ActionLink("ShiftAllStarsLeft", "ShiftAllStarsLeft", "Options", null, new { @class = "btn btn-default" })
     </p>*@
+    
+    <input type="button" id="changePassBtn" value="Сменить пароль" class="btn btn-default" />
+    
+    <div id="changePass" style="display: none">
+        <div class="input-group" style="margin: 10px 0;">
+            <span class="input-group-addon">Старый пароль:</span>
+            <input id="oldPass" type="text" class="form-control" name="msg">
+        </div>
+        
+        <div class="input-group" style="margin: 10px 0;">
+            <span class="input-group-addon">Новый пароль:</span>
+            <input id="newPass" type="text" class="form-control" name="msg">
+        </div>
+
+        <input type="button" id="savePassBtn" value="Сохранить пароль" class="btn btn-default" style="margin: 10px 0;"/>
+    </div>
 
 </div>
+
+<script src="~/Scripts/optionsController.js"></script>
