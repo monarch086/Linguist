@@ -11,6 +11,8 @@ namespace Linguist.Services.Interfaces
 
         bool EditUser(User user);
 
+        bool DoesLoginExist(string login);
+
         User GetUserByLogin(string login);
 
         IEnumerable<Word> GetUserWords(string login);

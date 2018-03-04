@@ -1,7 +1,20 @@
-﻿
+﻿@model Linguist.Web.Models.RegisterViewModel
+
 @{
     ViewBag.Title = "Linguist: Регистрация";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+            <div class="alert alert-info alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@Model.Message</strong>
+            </div>
+        </div>
+    </div>
 }
 
 <div class="container">
@@ -11,10 +24,10 @@
                 <div class="panel-heading">
                     <ul class="nav nav-tabs">
                         <li>
-                            @Html.ActionLink("Вход", "Login", "Account", new { data_toggle = "tab" })
+                            @Html.ActionLink("Вход", "Login")
                         </li>
                         <li class="active">
-                            @Html.ActionLink("Регистрация", "Register", "Account", new { data_toggle = "tab" })
+                            @Html.ActionLink("Регистрация", "Register")
                         </li>
                     </ul>
                 </div>
@@ -35,8 +48,9 @@
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-user"></span>
                                                         </div>
-                                                        <input type="text" placeholder="Введите логин (e-mail)" name="login" class="form-control">
+                                                        <input type="text" placeholder="Введите логин (e-mail)" name="login" class="form-control" id="login-input">
                                                     </div>
+                                                    <p id="register-warning"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -67,7 +81,7 @@
                                         <hr />
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                                <input type="submit" value="Сохранить" class="btn btn-success btn-block btn-lg" />
+                                                <input type="submit" value="Сохранить" id="submit-btn" class="btn btn-success btn-block btn-lg" />
                                             </div>
                                         </div>
                                     </div>
@@ -81,3 +95,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/registerController.js"></script>

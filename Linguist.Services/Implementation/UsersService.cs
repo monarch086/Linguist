@@ -25,6 +25,11 @@ namespace Linguist.Services.Implementation
         
         public bool AddUser(User user)
         {
+            if (DoesLoginExist(user.Login))
+            {
+                return false;
+            }
+                
             return _usersRepository.Add(user) > 0;
         }
 
@@ -36,6 +41,11 @@ namespace Linguist.Services.Implementation
         public bool EditUser(User user)
         {
             return _usersRepository.Edit(user) > 0;
+        }
+
+        public bool DoesLoginExist(string login)
+        {
+            return _usersRepository.GetAll().FirstOrDefault(u => u.Login == login) != null;
         }
 
         public User GetUserByLogin(string login)

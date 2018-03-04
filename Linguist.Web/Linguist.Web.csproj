@@ -160,6 +160,7 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\myWordsController.js" />
+    <Content Include="Scripts\registerController.js" />
     <Content Include="Scripts\testController.js" />
     <Content Include="Scripts\trainingController.js" />
     <Content Include="Web.config">
@@ -188,6 +189,7 @@
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\MyWordsModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Models\WordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Linguist.DataLayer.Model;
 using Linguist.Services.Interfaces;
+using Linguist.Web.Models;
 
 namespace Linguist.Web.Controllers
 {
@@ -48,9 +49,15 @@ namespace Linguist.Web.Controllers
         }
 
         [HttpGet]
+        public bool DoesLoginExist(string login)
+        {
+            return _userService.DoesLoginExist(login);
+        }
+
+        [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
 
         [HttpPost]
@@ -77,7 +84,7 @@ namespace Linguist.Web.Controllers
                 return Redirect(Url.Action("MyWords", "Home"));
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Exception: unable to add new user");
+            return View(new RegisterViewModel{ Message = $"Ошибка: невозможно добавить пользователя {login}" });
         }
 
         private void CreateCookie(string login)
