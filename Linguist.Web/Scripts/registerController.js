@@ -17,7 +17,12 @@ function checkLogin() {
     clearMessage();
 
     if (login === "") {
-        setRedWarningMessage("Введите логин");
+        setRedMessage("Введите логин");
+        return;
+    }
+
+    if (!validateLogin(login)) {
+        setRedMessage("Введите логин в формате: example@domain.com");
         return;
     }
 
@@ -27,11 +32,11 @@ function checkLogin() {
         },
         function (data) {
             if (data === "True") {
-                setRedWarningMessage("Данный логин занят, используйте другой");
+                setRedMessage("Данный логин занят, используйте другой");
                 return;
             }
 
-            setGreenWarningMessage("Данный логин свободен");
+            setGreenMessage("Данный логин свободен");
         });
 }
 
@@ -39,14 +44,30 @@ function clearMessage() {
     registerWarning.innerHTML = "";
 }
 
-function setRedWarningMessage(text) {
+function setRedMessage(text) {
     registerWarning.innerHTML = text;
     registerWarning.style.color = "red";
     submitBtn.disabled = true;
 }
 
-function setGreenWarningMessage(text) {
+function setGreenMessage(text) {
     registerWarning.innerHTML = text;
     registerWarning.style.color = "green";
     submitBtn.disabled = false;
+}
+
+function validateLogin(login) {
+    if (login.length < 5) {
+        return false;
+    }
+
+    if (!login.includes("@")) {
+        return false;
+    }
+
+    if (!login.includes(".")) {
+        return false;
+    }
+
+    return true;
 }
