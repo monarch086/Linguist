@@ -13,6 +13,8 @@ namespace Linguist.Services.Implementation
     public class AccountsService : IAccountsService
     {
         private readonly IRepository<User> _usersRepository;
+        private static readonly Random Random = new Random();
+        private const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
         public AccountsService(IRepository<User> usersRepository)
         {
@@ -86,13 +88,19 @@ namespace Linguist.Services.Implementation
             if (user == null)
                 return null;
 
-            var code = "some code";
+            var code = RandomString(10);
 
             user.RestoreCode = code;
             user.DateRestoreCodeGenerated = DateTime.UtcNow;
             _usersRepository.Edit(user);
 
             return code;
+        }
+        
+        private static string RandomString(int length)
+        {
+            return new string(Enumerable.Repeat(Chars, length)
+                .Select(s => s[Random.Next(s.Length)]).ToArray());
         }
     }
 }
