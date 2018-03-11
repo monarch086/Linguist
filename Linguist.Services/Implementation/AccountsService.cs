@@ -78,5 +78,21 @@ namespace Linguist.Services.Implementation
 
             return _usersRepository.Edit(user) > 0;
         }
+
+        public string GenerateRestoreCode(string login)
+        {
+            User user = _usersRepository.GetAll().FirstOrDefault(u => u.Login == login);
+
+            if (user == null)
+                return null;
+
+            var code = "some code";
+
+            user.RestoreCode = code;
+            user.DateRestoreCodeGenerated = DateTime.UtcNow;
+            _usersRepository.Edit(user);
+
+            return code;
+        }
     }
 }

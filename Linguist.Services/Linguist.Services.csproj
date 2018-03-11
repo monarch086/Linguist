@@ -59,10 +59,14 @@
     <Compile Include="Implementation\AccountsService.cs" />
     <Compile Include="Implementation\CategoriesService.cs" />
     <Compile Include="Implementation\LogsService.cs" />
+    <Compile Include="Implementation\MailProvider.cs" />
+    <Compile Include="Implementation\MailService.cs" />
     <Compile Include="Implementation\ResultsService.cs" />
     <Compile Include="Interfaces\IAccountsService.cs" />
     <Compile Include="Interfaces\ICategoriesService.cs" />
     <Compile Include="Interfaces\ILogsService.cs" />
+    <Compile Include="Interfaces\IMailProvider.cs" />
+    <Compile Include="Interfaces\IMailService.cs" />
     <Compile Include="Interfaces\IResultsService.cs" />
     <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="Interfaces\IWordsService.cs" />

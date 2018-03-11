@@ -34,8 +34,9 @@
                                                         <div class="input-group-addon">
                                                             <span class="glyphicon glyphicon-user"></span>
                                                         </div>
-                                                        <input type="text" placeholder="Логин" name="login" class="form-control">
+                                                        <input type="text" placeholder="Логин" name="login" class="form-control" id="login-input">
                                                     </div>
+                                                    <p id="login-warning"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -59,14 +60,14 @@
                                             </div>
                                             <div class="col-xs-6 col-sm-6 col-md-6">
                                                 <div class="form-group">
-                                                    <a href="#forgot" data-toggle="modal"> Забыли пароль? </a>
+                                                    <a data-toggle="modal" id="reset-btn"> Забыли пароль? </a>
                                                 </div>
                                             </div>
                                         </div>
                                         <hr/>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                                <input type="submit" value="Войти" class="btn btn-success btn-block btn-lg" />
+                                                <input type="submit" value="Войти" class="btn btn-success btn-block btn-lg" id="submit-btn"/>
                                             </div>
                                         </div>
                                     </div>
@@ -80,3 +81,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/loginController.js"></script>

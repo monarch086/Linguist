@@ -26,6 +26,7 @@ namespace Linguist.Web.Infrastructure
             _kernel.Bind<IWordsService>().To<WordsService>();
             _kernel.Bind<IResultsService>().To<ResultsService>();
             _kernel.Bind<ILogsService>().To<LogsService>();
+            _kernel.Bind<IMailService>().To<MailService>();
         }
 
         public object GetService(Type serviceType)

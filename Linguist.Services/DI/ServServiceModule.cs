@@ -1,6 +1,8 @@
 ﻿using Linguist.DataLayer.Model;
 using Linguist.DataLayer.Repositories;
 using Linguist.DataLayer.Repositories.LogRepositories;
+using Linguist.Services.Implementation;
+using Linguist.Services.Interfaces;
 using Ninject.Modules;
 
 namespace Linguist.Services.DI
@@ -17,6 +19,8 @@ namespace Linguist.Services.DI
             Bind<IRepository<TestResult>>().To<TestResultsRepository>();
             Bind<IRepository<TrainingResult>>().To<TrainingResultsRepository>();
             Bind<IRepository<Visitor>>().To<VisitorsRepository>();
+
+            Bind<IMailProvider>().To<MailProvider>();
         }
     }
 }

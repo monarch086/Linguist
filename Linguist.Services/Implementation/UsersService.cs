@@ -53,6 +53,11 @@ namespace Linguist.Services.Implementation
             return _usersRepository.GetAll().FirstOrDefault(u => u.Login.Equals(login));
         }
 
+        public User GetUserByRestoreCode(string restoreCode)
+        {
+            return _usersRepository.GetAll().FirstOrDefault(u => u.RestoreCode == restoreCode);
+        }
+
         public IEnumerable<Word> GetUserWords(string login)
         {
             if (login == null)

@@ -159,6 +159,7 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\loginController.js" />
     <Content Include="Scripts\myWordsController.js" />
     <Content Include="Scripts\optionsController.js" />
     <Content Include="Scripts\registerController.js" />
@@ -191,6 +192,7 @@
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\MyWordsModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\ResetViewModel.cs" />
     <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Models\WordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,6 +226,7 @@
     <Content Include="Views\Test\CategoryTest.cshtml" />
     <Content Include="Views\Options\Main.cshtml" />
     <Content Include="Views\Results\Statistics.cshtml" />
+    <Content Include="Views\Options\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

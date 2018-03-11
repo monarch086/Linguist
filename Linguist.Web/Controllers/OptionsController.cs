@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
+using System.Web.Routing;
 using Linguist.Services.Interfaces;
+using Linguist.Web.Models;
 
 namespace Linguist.Web.Controllers
 {
@@ -8,16 +10,14 @@ namespace Linguist.Web.Controllers
         private readonly IAccountsService _accountsService;
         private readonly IUsersService _userService;
         private readonly IWordsService _wordsService;
-        private readonly ICategoriesService _categoriesService;
-        private readonly ILogsService _logsService;
+        private readonly IMailService _mailService;
 
-        public OptionsController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, ICategoriesService categoriesService, ILogsService logsService)
+        public OptionsController(IAccountsService accountsService, IUsersService userService, IWordsService wordsService, IMailService mailService)
         {
             _accountsService = accountsService;
             _userService = userService;
             _wordsService = wordsService;
-            _categoriesService = categoriesService;
-            _logsService = logsService;
+            _mailService = mailService;
         }
 
         public ActionResult Main()
@@ -77,6 +77,45 @@ namespace Linguist.Web.Controllers
             }
 
             return false;
+        }
+
+        public void SendResetMail(string login)
+        {
+            if (_userService.DoesLoginExist(login))
+            {
+                var restoreCode = _accountsService.GenerateRestoreCode(login);
+
+                var subject = "Linguist: Reseting password";
+                
+                string link = Url.Action("ResetPassword", "Options",
+                    new RouteValueDictionary(new { restoreCode }),
+                    HttpContext.Request.Url.Scheme);
+
+                var text = $"To reset password on Linguist site for login {login} click on {link}";
+
+                _mailService.SendMail(login, text, subject);
+            }
+        }
+
+        public ActionResult ResetPassword(string restoreCode)
+        {
+            var login = _userService.GetUserByRestoreCode(restoreCode).Login;
+            return View(new ResetViewModel{ Login = login ?? ""});
+        }
+
+        [HttpPost]
+        public string ResetPassword(ResetViewModel model)
+        {
+            var user = _userService.GetUserByLogin(model.Login);
+
+            if (_accountsService.SetPassword(model.Login, model.Password))
+            {
+                user.RestoreCode = null;
+                _userService.EditUser(user);
+                return "Password changed";
+            }
+
+            return "Error while changing password";
         }
     }
 }

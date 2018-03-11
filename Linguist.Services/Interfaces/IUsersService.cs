@@ -15,6 +15,8 @@ namespace Linguist.Services.Interfaces
 
         User GetUserByLogin(string login);
 
+        User GetUserByRestoreCode(string restoreCode);
+
         IEnumerable<Word> GetUserWords(string login);
 
         IEnumerable<Category> GetUserCategories(string login);

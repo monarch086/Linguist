@@ -17,5 +17,9 @@ namespace Linguist.DataLayer.Model
         public DateTime DateAdded { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public string RestoreCode { get; set; }
+
+        public DateTime? DateRestoreCodeGenerated { get; set; }
     }
 }

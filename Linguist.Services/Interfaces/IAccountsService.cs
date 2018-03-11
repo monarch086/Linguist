@@ -13,5 +13,7 @@ namespace Linguist.Services.Interfaces
         string GetUserName(HttpContext context);
 
         bool SetPassword(string login, string password);
+
+        string GenerateRestoreCode(string login);
     }
 }
