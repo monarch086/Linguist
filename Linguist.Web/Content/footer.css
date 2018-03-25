@@ -1,0 +1,38 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0 0 50px; /* bottom = footer height */
+}
+
+footer.page-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow:hidden;
+    color: #ffffff;
+}
+footer.page-footer .container-fluid {
+    width: auto; }
+footer.page-footer .footer-copyright {
+    overflow: hidden;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.6); }
+
+.mdb-color.darken-2 {
+    background-color: #2e3951 !important;
+}
+
+.pt-4 {
+    padding-top: 1.5rem !important;
+}
+
+.pb-4 {
+    padding-bottom: 1.5rem !important;
+}
+
+.font-small {
+    font-size: 0.9rem; }
