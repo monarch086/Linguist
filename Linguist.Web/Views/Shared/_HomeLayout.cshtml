@@ -14,51 +14,51 @@
 </head>
 
 <body>
-@*---------------------------------------------------------------------*@
-<nav class="navbar navbar-inverse">
+    <!--Menu-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Linguist", "MyWords", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@Url.Action("MyWords", "Home")"><span class="glyphicon glyphicon-book"></span> Мои слова</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Main", "Training")"><span class="glyphicon glyphicon-hourglass"></span> Тренировка</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Main", "Test")"><span class="glyphicon glyphicon-flag"></span> Тест</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Statistics", "Results")"><span class="glyphicon glyphicon-stats"></span> Результаты</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Main", "Options")"><span class="glyphicon glyphicon-cog"></span> Настройки</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="@Url.Action("SignOut", "Account")"><span class="glyphicon glyphicon-log-out"></span> Выход</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--/.Menu-->
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>                        
-            </button>
-            @Html.ActionLink("Linguist", "MyWords", "Home", null, new { @class = "navbar-brand" })
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="@Url.Action("MyWords", "Home")"><span class="glyphicon glyphicon-book"></span> Мои слова</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Main", "Training")"><span class="glyphicon glyphicon-hourglass"></span> Тренировка</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Main", "Test")"><span class="glyphicon glyphicon-flag"></span> Тест</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Statistics", "Results")"><span class="glyphicon glyphicon-stats"></span> Результаты</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Main", "Options")"><span class="glyphicon glyphicon-cog"></span> Настройки</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="@Url.Action("SignOut", "Account")"><span class="glyphicon glyphicon-log-out"></span> Выход</a>
-                </li>
-            </ul>
+        <div class="row text-center">
+            <div>
+                @RenderBody()
+            </div>
         </div>
     </div>
-</nav>
-@*---------------------------------------------------------------------*@
-<div class="container-fluid">
-    <div class="row text-center">
-        <div>
-            @RenderBody()
-        </div>
-    </div>
-</div>
 </body>
 
 <!--Footer-->
