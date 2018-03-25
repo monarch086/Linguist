@@ -1,15 +1,16 @@
-﻿.btn-success
-{
+﻿.btn-success {
+    background: #1c2a48;
+    border-color: #1c2a48;
     transition: 0.5s;
 }
 
-.btn-success:hover, .btn-success:focus
-{
-    background: white;
-    border-color: #5cb85c;
-    color: black;
-    transition: all 0.4s;
-}
+    .btn-success:hover, .btn-success:focus, .btn-success:disabled, .btn-success:hover:disabled {
+        background: #3b465e;
+        /*border-color: #5cb85c;*/
+        border-color: #1c2a48;
+        color: black;
+        transition: all 0.4s;
+    }
 
 .btn-warning
 {
@@ -44,9 +45,9 @@
     text-align: center;
 }
 
-.input-group-addon
-{
-    background-color: #5cb85c;
+.input-group-addon {
+    /*background-color: #5cb85c;*/
+    background-color: #1c2a48;
     color: white;
 }
 
